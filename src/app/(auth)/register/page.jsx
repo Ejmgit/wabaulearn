@@ -331,7 +331,7 @@ function BtnPrimary({ children, onClick, className = "", style = {} }) {
       whileHover={{ y: -1, boxShadow: "0 4px 20px rgba(61,158,114,0.28)" }}
       whileTap={{ y: 0, boxShadow: "none" }}
       onClick={onClick}
-      className={`w-full flex items-center text-white bg-[#1a4a34] hover:bg-[#52c48e]  hover:text-black justify-center gap-2 rounded-lg py-[0.78rem] text-sm font-semibold cursor-pointer mt-5 transition-colors ${className}`}
+      className={`w-full flex items-center text-white bg-[#1a4a34] hover:bg-[#52c48e]  hover:text-black justify-center gap-2 rounded-lg py-[0.78rem] text-sm font-semibold cursor-pointer  transition-colors ${className}`}
     >
       {children}
     </motion.button>
@@ -494,28 +494,23 @@ function UserRegister() {
   const [step, setStep] = useState(1);
   const [selectedRole, setSelectedRole] = useState(null);
   const route = useRouter();
-  const [notifications, setNotification] = useState();
   const { user } = useContext(UserContext);
+  const [notification, setNotification] = useState(""); // fix: was `notifications`, never rendered
+  const [error, setError] = useState({});
 
   // Step 1
   const [firstName, setFirstName] = useState("");
-  const [user_id, setUserId] = useState(user?.id);
   const [lastName, setLastName] = useState("");
-  const [regEmail, setRegEmail] = useState("");
   const [country, setCountry] = useState("");
   const [institution, setInstitution] = useState("");
-  const [emailHint, setEmailHint] = useState({
-    text: "Use your institutional email to unlock CME credit reporting and verification.",
-    success: false,
-  });
 
   // Step 2
   const [specialty, setSpecialty] = useState("");
   const [regNumber, setRegNumber] = useState("");
 
   // Step 3 consents
-  const [terms, setTerms] = useState(true);
-  const [research, setResearch] = useState(true);
+  const [terms, setTerms] = useState(false); // fix: was `true` — consent must be explicit
+  const [research, setResearch] = useState(false); // fix: was `true` — opt-in should default off
   const [updates, setUpdates] = useState(false);
 
   const handleSignin = () => {
@@ -523,40 +518,24 @@ function UserRegister() {
   };
 
   const handleUserProfile = async () => {
+    // fix: require terms before submitting
+    if (!terms) {
+      setNotification(
+        "Please accept the Terms of Service and Privacy Policy to continue.",
+      );
+      return;
+    }
+
+    setNotification("");
+
     try {
-      // validation
-      if (!firstName || !lastName) {
-        return setNotification("Please enter full name");
-      }
-
-      if (!regEmail) {
-        return setNotification("Email is required");
-      }
-
-      if (!country) {
-        return setNotification("Please select country");
-      }
-
-      if (!selectedRole) {
-        return setNotification("Please select profession");
-      }
-
-      if (!specialty) {
-        return setNotification("Please select specialty");
-      }
-
-      if (!terms) {
-        return setNotification("You must accept Terms & Privacy Policy");
-      }
-
-      // insert profile
       const { data, error } = await supabase2
         .from("profile")
         .insert([
           {
             user_id: user?.id,
             full_name: `${firstName} ${lastName}`,
-            email: regEmail,
+            email: user?.email,
             country: country,
             hospital: institution,
             profession: selectedRole,
@@ -575,42 +554,34 @@ function UserRegister() {
       }
 
       console.log("Profile created:", data);
-
-      // success
       setStep(4);
     } catch (error) {
       console.error(error);
-      setNotification("Something went wrong");
+      setNotification("Something went wrong. Please try again.");
     }
   };
 
-  const handleEmailChange = (v) => {
-    setRegEmail(v);
-    if (
-      v.includes("@") &&
-      !v.includes("gmail") &&
-      !v.includes("yahoo") &&
-      !v.includes("hotmail")
-    ) {
-      setEmailHint({
-        text: "✓ Institutional email detected — full CME reporting access enabled.",
-        success: true,
-      });
-    } else if (
-      v.includes("gmail") ||
-      v.includes("yahoo") ||
-      v.includes("hotmail")
-    ) {
-      setEmailHint({
-        text: "Personal email detected. Institutional email enables automatic CME credit reporting.",
-        success: false,
-      });
-    } else {
-      setEmailHint({
-        text: "Use your institutional email to unlock CME credit reporting and verification.",
-        success: false,
-      });
+  const handleStep1 = () => {
+    const errs = {};
+    if (!firstName) errs.firstName = "Please enter your first name";
+    if (!lastName) errs.lastName = "Please enter your last name";
+    if (!institution)
+      errs.hospital = "Write name of institute or hospital of affiliation";
+    if (!country) errs.country = "Please select your country";
+    setError(errs);
+
+    if (Object.keys(errs).length > 0) return;
+    setStep(2);
+  };
+
+  // fix: was calling setStep(3) directly — no validation ran for step 2
+  const handleStep2 = () => {
+    if (!selectedRole) {
+      setError((p) => ({ ...p, role: "Please select your profession" }));
+      return;
     }
+    setError((p) => ({ ...p, role: "" }));
+    setStep(3);
   };
 
   if (step === 4) {
@@ -691,6 +662,20 @@ function UserRegister() {
 
       <StepIndicator current={step} />
 
+      {/* fix: notification banner — was set but never rendered */}
+      {notification && (
+        <div
+          className="text-[12px] rounded-lg px-3 py-2 mb-3"
+          style={{
+            background: "rgba(58,16,16,0.25)",
+            border: `1px solid ${t.dangerBorder}`,
+            color: t.danger ?? "#f87171",
+          }}
+        >
+          {notification}
+        </div>
+      )}
+
       <AnimatePresence mode="wait">
         {/* STEP 1 */}
         {step === 1 && (
@@ -701,7 +686,6 @@ function UserRegister() {
             animate="visible"
             exit="exit"
           >
-            {/* Avatar */}
             <div className="flex items-center gap-3 mb-4">
               <motion.div
                 whileHover={{
@@ -721,7 +705,7 @@ function UserRegister() {
                   className="text-[13px] font-medium mb-0.5"
                   style={{ color: t.ink }}
                 >
-                  Profile Details{" "}
+                  Profile Details
                 </div>
                 <div
                   className="text-[11px] leading-relaxed"
@@ -733,72 +717,75 @@ function UserRegister() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 mb-4">
-              <FormGroup label="First name">
+              <FormGroup label="First name" error={error?.firstName}>
                 <input
                   type="text"
                   placeholder="Amara"
                   value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  onChange={(e) => {
+                    setFirstName(e.target.value);
+                    setError((p) => ({ ...p, firstName: "" }));
+                  }}
                   className="w-full rounded-lg px-3 py-[0.68rem] text-sm outline-none"
                   style={{
-                    background: t.surface2,
-                    border: `1px solid ${t.border}`,
+                    background: error.firstName
+                      ? "rgba(58,16,16,0.3)"
+                      : t.surface2,
+                    border: `1px solid ${error.firstName ? t.dangerBorder : t.border}`,
                     color: t.ink,
                     fontFamily: "'Outfit',sans-serif",
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = t.green)}
-                  onBlur={(e) => (e.target.style.borderColor = t.border)}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = error.firstName
+                      ? t.dangerBorder
+                      : t.green;
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = error.firstName
+                      ? t.dangerBorder
+                      : t.border;
+                  }}
                 />
               </FormGroup>
-              <FormGroup label="Last name">
+              <FormGroup label="Last name" error={error?.lastName}>
                 <input
                   type="text"
                   placeholder="Osei-Bonsu"
                   value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  onChange={(e) => {
+                    setLastName(e.target.value);
+                    setError((p) => ({ ...p, lastName: "" }));
+                  }}
                   className="w-full rounded-lg px-3 py-[0.68rem] text-sm outline-none"
                   style={{
-                    background: t.surface2,
-                    border: `1px solid ${t.border}`,
+                    background: error.lastName
+                      ? "rgba(58,16,16,0.3)"
+                      : t.surface2,
+                    border: `1px solid ${error.lastName ? t.dangerBorder : t.border}`,
                     color: t.ink,
                     fontFamily: "'Outfit',sans-serif",
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = t.green)}
-                  onBlur={(e) => (e.target.style.borderColor = t.border)}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = error.lastName
+                      ? t.dangerBorder
+                      : t.green;
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = error.lastName
+                      ? t.dangerBorder
+                      : t.border;
+                  }}
                 />
               </FormGroup>
             </div>
 
-            <FormGroup label="Professional email" hint={emailHint}>
-              <div className="relative">
-                <span
-                  className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
-                  style={{ color: t.ink3 }}
-                >
-                  <Mail size={14} />
-                </span>
-                <input
-                  type="email"
-                  placeholder="you@hospital.org"
-                  value={regEmail}
-                  onChange={(e) => handleEmailChange(e.target.value)}
-                  className="w-full rounded-lg pl-9 pr-3 py-[0.68rem] text-sm outline-none"
-                  style={{
-                    background: t.surface2,
-                    border: `1px solid ${t.border}`,
-                    color: t.ink,
-                    fontFamily: "'Outfit',sans-serif",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = t.green)}
-                  onBlur={(e) => (e.target.style.borderColor = t.border)}
-                />
-              </div>
-            </FormGroup>
-
-            <FormGroup label="Country">
+            <FormGroup label="Country" error={error?.country}>
               <FormSelect
                 value={country}
-                onChange={(e) => setCountry(e.target.value)}
+                onChange={(e) => {
+                  setCountry(e.target.value);
+                  setError((p) => ({ ...p, country: "" }));
+                }}
               >
                 <option value="">Select your country…</option>
                 {Object.entries(COUNTRIES).map(([group, opts]) => (
@@ -813,7 +800,7 @@ function UserRegister() {
               </FormSelect>
             </FormGroup>
 
-            <FormGroup label="Institution / Hospital">
+            <FormGroup label="Institution / Hospital" error={error.hospital}>
               <div className="relative">
                 <span
                   className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
@@ -825,23 +812,36 @@ function UserRegister() {
                   type="text"
                   placeholder="e.g. Kenyatta National Hospital, Nairobi"
                   value={institution}
-                  onChange={(e) => setInstitution(e.target.value)}
+                  onChange={(e) => {
+                    setInstitution(e.target.value);
+                    setError((p) => ({ ...p, hospital: "" }));
+                  }}
                   className="w-full rounded-lg pl-9 pr-3 py-[0.68rem] text-sm outline-none"
                   style={{
-                    background: t.surface2,
-                    border: `1px solid ${t.border}`,
+                    background: error.hospital
+                      ? "rgba(58,16,16,0.3)"
+                      : t.surface2,
+                    border: `1px solid ${error.hospital ? t.dangerBorder : t.border}`,
                     color: t.ink,
                     fontFamily: "'Outfit',sans-serif",
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = t.green)}
-                  onBlur={(e) => (e.target.style.borderColor = t.border)}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = error.hospital
+                      ? t.dangerBorder
+                      : t.green;
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = error.hospital
+                      ? t.dangerBorder
+                      : t.border;
+                  }}
                 />
               </div>
             </FormGroup>
 
             <div className="flex gap-2 mt-5">
               <BtnPrimary
-                onClick={() => setStep(2)}
+                onClick={handleStep1}
                 className="flex-1"
                 style={{ marginTop: 0 }}
               >
@@ -874,6 +874,7 @@ function UserRegister() {
             >
               Select your profession
             </div>
+
             <div className="grid grid-cols-2 gap-2 mb-4">
               {ROLES.map(({ id, Icon, title, sub }) => (
                 <motion.div
@@ -883,10 +884,13 @@ function UserRegister() {
                     background: "rgba(61,158,114,0.05)",
                   }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => setSelectedRole(id)}
+                  onClick={() => {
+                    setSelectedRole(id);
+                    setError((p) => ({ ...p, role: "" }));
+                  }}
                   className="flex items-center gap-2 p-[0.6rem] rounded-lg cursor-pointer transition-all"
                   style={{
-                    border: `1px solid ${selectedRole === id ? t.green : t.border}`,
+                    border: `1px solid ${selectedRole === id ? t.green : error.role ? t.dangerBorder : t.border}`,
                     background:
                       selectedRole === id
                         ? "rgba(61,158,114,0.08)"
@@ -914,6 +918,16 @@ function UserRegister() {
                 </motion.div>
               ))}
             </div>
+
+            {/* fix: show role error inline */}
+            {error.role && (
+              <p
+                className="text-[11px] mb-3"
+                style={{ color: t.danger ?? "#f87171" }}
+              >
+                {error.role}
+              </p>
+            )}
 
             <FormGroup label="Primary specialty">
               <FormSelect
@@ -952,7 +966,7 @@ function UserRegister() {
               />
             </FormGroup>
 
-            <div className="flex gap-2 mt-5">
+            <div className="flex items-center gap-2 mt-5">
               <motion.button
                 whileHover={{ borderColor: t.green, color: t.green2 }}
                 onClick={() => setStep(1)}
@@ -966,12 +980,14 @@ function UserRegister() {
               >
                 <ArrowLeft size={14} /> Back
               </motion.button>
+              {/* fix: was setStep(3) directly — now validates first */}
               <BtnPrimary
-                onClick={() => setStep(3)}
+                onClick={handleStep2}
                 className="flex-1"
                 style={{ marginTop: 0 }}
               >
-                Continue — Security <ArrowRight size={14} />
+                Continue — Consents <ArrowRight size={14} />{" "}
+                {/* fix: was "Security" */}
               </BtnPrimary>
             </div>
           </motion.div>
@@ -986,7 +1002,6 @@ function UserRegister() {
             animate="visible"
             exit="exit"
           >
-            {/* Consents */}
             <div className="mt-4 mb-2">
               <div
                 style={{
@@ -1003,7 +1018,10 @@ function UserRegister() {
               <CheckRow
                 id="terms"
                 checked={terms}
-                onChange={(e) => setTerms(e.target.checked)}
+                onChange={(e) => {
+                  setTerms(e.target.checked);
+                  if (e.target.checked) setNotification("");
+                }}
               >
                 I agree to Wabau's{" "}
                 <span style={{ color: t.green2 }}>Terms of Service</span> and{" "}
@@ -1046,7 +1064,7 @@ function UserRegister() {
                 <ArrowLeft size={14} /> Back
               </motion.button>
               <BtnPrimary
-                onClick={() => setStep(4)}
+                onClick={handleUserProfile}
                 className="flex-1"
                 style={{ marginTop: 0 }}
               >

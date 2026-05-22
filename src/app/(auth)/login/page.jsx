@@ -1262,18 +1262,20 @@ function RegisterView({ onSwitch }) {
               onChange={handleChange}
               className="w-full rounded-lg pl-9 pr-10 py-[0.68rem] text-sm outline-none transition-all"
               style={{
-                background: errors.password ? "rgba(58,16,16,0.3)" : t.surface2,
+                background: errors.password2
+                  ? "rgba(58,16,16,0.3)"
+                  : t.surface2,
                 border: `1px solid ${errors.password ? t.dangerBorder : t.border}`,
                 color: t.ink,
                 fontFamily: "'Outfit',sans-serif",
               }}
               onFocus={(e) => {
-                e.target.style.borderColor = errors.password
+                e.target.style.borderColor = errors.password2
                   ? t.dangerBorder
                   : t.green;
               }}
               onBlur={(e) => {
-                e.target.style.borderColor = errors.password
+                e.target.style.borderColor = errors.password2
                   ? t.dangerBorder
                   : t.border;
               }}
