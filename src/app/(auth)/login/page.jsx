@@ -28,8 +28,8 @@ import {
   FileText,
   Loader,
 } from "lucide-react";
-import { supabase2 } from "@/Config/Supabase";
 import { redirect, useRouter } from "next/navigation";
+import { supabase2 } from "@/Config/Supabase";
 
 /* ─── THEME TOKENS ─── */
 const t = {
@@ -795,16 +795,6 @@ function LoginView({ onSwitch, onForgot }) {
     }
   };
 
-  // checks if user is authenticated
-  useLayoutEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      redirect("/loading/");
-      return;
-    }
-  }, []);
-
   return (
     <motion.div
       key="login"
@@ -1018,6 +1008,7 @@ function RegisterView({ onSwitch }) {
   const [showNotification, setNotifications] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const strength = calcStrength(userData?.password);
 
   //   function which handles registration
   const handleRegister = async () => {
@@ -1184,7 +1175,7 @@ function RegisterView({ onSwitch }) {
         </FormGroup>
 
         {/* Password section */}
-        <FormGroup label="Password" error={errors.password}>
+        <FormGroup label="Create password" error={errors.password}>
           <div className="relative">
             <span
               className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
@@ -1195,10 +1186,10 @@ function RegisterView({ onSwitch }) {
             <input
               type={showPwd ? "text" : "password"}
               name="password"
-              placeholder="••••••••"
+              placeholder="Min. 8 characters"
               value={userData?.password}
               onChange={handleChange}
-              className="w-full rounded-lg pl-9 pr-10 py-[0.68rem] text-sm outline-none transition-all"
+              className="w-full rounded-lg pl-9 pr-10 py-[0.68rem] text-sm outline-none"
               style={{
                 background: errors.password ? "rgba(58,16,16,0.3)" : t.surface2,
                 border: `1px solid ${errors.password ? t.dangerBorder : t.border}`,
@@ -1219,18 +1210,39 @@ function RegisterView({ onSwitch }) {
             <button
               onClick={() => setShowPwd((p) => !p)}
               className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
-              style={{
-                background: "none",
-                border: "none",
-                color: t.ink3,
-                transition: "color 0.15s",
-              }}
+              style={{ background: "none", border: "none", color: t.ink3 }}
               onMouseEnter={(e) => (e.currentTarget.style.color = t.green2)}
               onMouseLeave={(e) => (e.currentTarget.style.color = t.ink3)}
             >
               {showPwd ? <EyeOff size={14} /> : <Eye size={14} />}
             </button>
           </div>
+          {/* Strength bars */}
+          <div className="flex gap-1 mt-2">
+            {[1, 2, 3, 4].map((i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  background:
+                    i <= strength ? STRENGTH_COLORS[strength] : t.surface3,
+                }}
+                transition={{ duration: 0.3 }}
+                className="flex-1 h-0.75 rounded-full"
+              />
+            ))}
+          </div>
+          {userData?.password && (
+            <p
+              className="text-[10.5px] mt-1"
+              style={{
+                color: STRENGTH_COLORS[strength],
+                fontFamily: "'DM Mono',monospace",
+                letterSpacing: "0.1em",
+              }}
+            >
+              {STRENGTH_LABELS[strength]}
+            </p>
+          )}
         </FormGroup>
 
         {/* confirm password section */}
@@ -1576,6 +1588,16 @@ function ForgotView({ onBack }) {
 /* ─── ROOT COMPONENT ─── */
 export default function WabauAuth() {
   const [view, setView] = useState("login"); // "login" | "register" | "forgot"
+
+  // checks if user is authenticated
+  useLayoutEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      redirect("/loading/");
+      return;
+    }
+  }, []);
 
   return (
     <>

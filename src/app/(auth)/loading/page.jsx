@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { redirect, usePathname, useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { usePathname, useRouter } from "next/navigation";
 import UserContext from "../../../Context/UserContext";
+import { motion } from "framer-motion";
 
 function LoadingPage() {
   const [progress, setProgress] = useState(0);

@@ -1,14 +1,6 @@
-// import React from "react";
-
-// function UserRegister() {
-//   return <div>UserRegister</div>;
-// }
-
-// export default UserRegister;
-
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useLayoutEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
@@ -33,6 +25,9 @@ import {
   Users,
   FileText,
 } from "lucide-react";
+import { redirect, useRouter } from "next/navigation";
+import { supabase2 } from "@/Config/Supabase";
+import UserContext from "@/Context/UserContext";
 
 /* ─── THEME TOKENS ─── */
 const t = {
@@ -336,17 +331,7 @@ function BtnPrimary({ children, onClick, className = "", style = {} }) {
       whileHover={{ y: -1, boxShadow: "0 4px 20px rgba(61,158,114,0.28)" }}
       whileTap={{ y: 0, boxShadow: "none" }}
       onClick={onClick}
-      className={`w-full flex items-center justify-center gap-2 rounded-lg py-[0.78rem] text-sm font-semibold cursor-pointer mt-5 transition-colors ${className}`}
-      style={{
-        background: t.green,
-        color: "#fff",
-        border: "none",
-        fontFamily: "'Outfit', sans-serif",
-        letterSpacing: "0.02em",
-        ...style,
-      }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = t.green2)}
-      onMouseLeave={(e) => (e.currentTarget.style.background = t.green)}
+      className={`w-full flex items-center text-white bg-[#1a4a34] hover:bg-[#52c48e]  hover:text-black justify-center gap-2 rounded-lg py-[0.78rem] text-sm font-semibold cursor-pointer mt-5 transition-colors ${className}`}
     >
       {children}
     </motion.button>
@@ -429,7 +414,7 @@ function CheckRow({ id, checked, onChange, children }) {
         id={id}
         checked={checked}
         onChange={onChange}
-        className="mt-[2px] w-[15px] h-[15px] flex-shrink-0 cursor-pointer rounded"
+        className="mt-0.5 w-3.75 h-3.75 shrink-0 cursor-pointer rounded"
         style={{ accentColor: t.green }}
       />
       <label
@@ -505,12 +490,16 @@ function StepIndicator({ current }) {
 }
 
 /* ─── REGISTER VIEW ─── */
-function RegisterView() {
+function UserRegister() {
   const [step, setStep] = useState(1);
   const [selectedRole, setSelectedRole] = useState(null);
+  const route = useRouter();
+  const [notifications, setNotification] = useState();
+  const { user } = useContext(UserContext);
 
   // Step 1
   const [firstName, setFirstName] = useState("");
+  const [user_id, setUserId] = useState(user?.id);
   const [lastName, setLastName] = useState("");
   const [regEmail, setRegEmail] = useState("");
   const [country, setCountry] = useState("");
@@ -524,18 +513,76 @@ function RegisterView() {
   const [specialty, setSpecialty] = useState("");
   const [regNumber, setRegNumber] = useState("");
 
-  // Step 3
-  const [password, setPassword] = useState("");
-  const [confirmPwd, setConfirmPwd] = useState("");
-  const [showPwd, setShowPwd] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [pwdMatch, setPwdMatch] = useState(null); // null | true | false
-  const strength = calcStrength(password);
-
   // Step 3 consents
   const [terms, setTerms] = useState(true);
   const [research, setResearch] = useState(true);
   const [updates, setUpdates] = useState(false);
+
+  const handleSignin = () => {
+    route.push("login");
+  };
+
+  const handleUserProfile = async () => {
+    try {
+      // validation
+      if (!firstName || !lastName) {
+        return setNotification("Please enter full name");
+      }
+
+      if (!regEmail) {
+        return setNotification("Email is required");
+      }
+
+      if (!country) {
+        return setNotification("Please select country");
+      }
+
+      if (!selectedRole) {
+        return setNotification("Please select profession");
+      }
+
+      if (!specialty) {
+        return setNotification("Please select specialty");
+      }
+
+      if (!terms) {
+        return setNotification("You must accept Terms & Privacy Policy");
+      }
+
+      // insert profile
+      const { data, error } = await supabase2
+        .from("profile")
+        .insert([
+          {
+            user_id: user?.id,
+            full_name: `${firstName} ${lastName}`,
+            email: regEmail,
+            country: country,
+            hospital: institution,
+            profession: selectedRole,
+            specialty: specialty,
+            reg_number: regNumber,
+            terms_policy: terms,
+            research: research,
+            updates: updates,
+          },
+        ])
+        .select();
+
+      if (error) {
+        console.error(error);
+        return setNotification(error.message);
+      }
+
+      console.log("Profile created:", data);
+
+      // success
+      setStep(4);
+    } catch (error) {
+      console.error(error);
+      setNotification("Something went wrong");
+    }
+  };
 
   const handleEmailChange = (v) => {
     setRegEmail(v);
@@ -566,12 +613,6 @@ function RegisterView() {
     }
   };
 
-  const handleConfirmChange = (v) => {
-    setConfirmPwd(v);
-    if (!v) setPwdMatch(null);
-    else setPwdMatch(v === password);
-  };
-
   if (step === 4) {
     return (
       <motion.div
@@ -600,7 +641,7 @@ function RegisterView() {
               marginBottom: 8,
             }}
           >
-            Account created
+            Profile created
           </h2>
           <p
             className="text-[13px] leading-relaxed mx-auto mb-6"
@@ -611,26 +652,12 @@ function RegisterView() {
             tracking.
           </p>
           <BtnPrimary
-            onClick={() => onSwitch("login")}
+            onClick={handleSignin}
             style={{ maxWidth: 280, margin: "0 auto" }}
           >
             <span>Sign in to your account</span>
             <ArrowRight size={15} />
           </BtnPrimary>
-          <p className="mt-4 text-[12px]" style={{ color: t.ink3 }}>
-            Didn't receive the email?{" "}
-            <button
-              className="cursor-pointer hover:underline"
-              style={{
-                color: t.green2,
-                background: "none",
-                border: "none",
-                fontFamily: "'Outfit',sans-serif",
-              }}
-            >
-              Resend verification →
-            </button>
-          </p>
         </div>
       </motion.div>
     );
@@ -681,7 +708,7 @@ function RegisterView() {
                   borderColor: t.green,
                   background: "rgba(61,158,114,0.05)",
                 }}
-                className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer transition-all"
+                className="w-16 h-16 rounded-full flex items-center justify-center shrink-0 cursor-pointer transition-all"
                 style={{
                   background: t.surface3,
                   border: `2px dashed ${t.border}`,
@@ -694,13 +721,7 @@ function RegisterView() {
                   className="text-[13px] font-medium mb-0.5"
                   style={{ color: t.ink }}
                 >
-                  Profile photo{" "}
-                  <span
-                    className="font-normal text-[11px]"
-                    style={{ color: t.ink3 }}
-                  >
-                    (optional)
-                  </span>
+                  Profile Details{" "}
                 </div>
                 <div
                   className="text-[11px] leading-relaxed"
@@ -935,7 +956,7 @@ function RegisterView() {
               <motion.button
                 whileHover={{ borderColor: t.green, color: t.green2 }}
                 onClick={() => setStep(1)}
-                className="flex-shrink-0 flex items-center gap-1 rounded-lg px-4 py-[0.65rem] text-sm font-medium cursor-pointer"
+                className="shrink-0 flex items-center gap-1 rounded-lg px-4 py-[0.65rem] text-sm font-medium cursor-pointer"
                 style={{
                   background: "transparent",
                   color: t.ink3,
@@ -965,135 +986,6 @@ function RegisterView() {
             animate="visible"
             exit="exit"
           >
-            <FormGroup label="Create password">
-              <div className="relative">
-                <span
-                  className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
-                  style={{ color: t.ink3 }}
-                >
-                  <Lock size={14} />
-                </span>
-                <input
-                  type={showPwd ? "text" : "password"}
-                  placeholder="Min. 8 characters"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full rounded-lg pl-9 pr-10 py-[0.68rem] text-sm outline-none"
-                  style={{
-                    background: t.surface2,
-                    border: `1px solid ${t.border}`,
-                    color: t.ink,
-                    fontFamily: "'Outfit',sans-serif",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = t.green)}
-                  onBlur={(e) => (e.target.style.borderColor = t.border)}
-                />
-                <button
-                  onClick={() => setShowPwd((p) => !p)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
-                  style={{ background: "none", border: "none", color: t.ink3 }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = t.green2)}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = t.ink3)}
-                >
-                  {showPwd ? <EyeOff size={14} /> : <Eye size={14} />}
-                </button>
-              </div>
-              {/* Strength bars */}
-              <div className="flex gap-1 mt-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <motion.div
-                    key={i}
-                    animate={{
-                      background:
-                        i <= strength ? STRENGTH_COLORS[strength] : t.surface3,
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="flex-1 h-[3px] rounded-full"
-                  />
-                ))}
-              </div>
-              {password && (
-                <p
-                  className="text-[10.5px] mt-1"
-                  style={{
-                    color: STRENGTH_COLORS[strength],
-                    fontFamily: "'DM Mono',monospace",
-                    letterSpacing: "0.1em",
-                  }}
-                >
-                  {STRENGTH_LABELS[strength]}
-                </p>
-              )}
-            </FormGroup>
-
-            <FormGroup label="Confirm password">
-              <div className="relative">
-                <span
-                  className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
-                  style={{ color: t.ink3 }}
-                >
-                  <Lock size={14} />
-                </span>
-                <input
-                  type={showConfirm ? "text" : "password"}
-                  placeholder="Repeat password"
-                  value={confirmPwd}
-                  onChange={(e) => handleConfirmChange(e.target.value)}
-                  className="w-full rounded-lg pl-9 pr-10 py-[0.68rem] text-sm outline-none"
-                  style={{
-                    background:
-                      confirmPwd && !pwdMatch
-                        ? "rgba(58,16,16,0.3)"
-                        : t.surface2,
-                    border: `1px solid ${confirmPwd && !pwdMatch ? t.dangerBorder : t.border}`,
-                    color: t.ink,
-                    fontFamily: "'Outfit',sans-serif",
-                  }}
-                  onFocus={(e) =>
-                    (e.target.style.borderColor =
-                      confirmPwd && !pwdMatch ? t.dangerBorder : t.green)
-                  }
-                  onBlur={(e) =>
-                    (e.target.style.borderColor =
-                      confirmPwd && !pwdMatch ? t.dangerBorder : t.border)
-                  }
-                />
-                <button
-                  onClick={() => setShowConfirm((p) => !p)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
-                  style={{ background: "none", border: "none", color: t.ink3 }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = t.green2)}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = t.ink3)}
-                >
-                  {showConfirm ? <EyeOff size={14} /> : <Eye size={14} />}
-                </button>
-              </div>
-              <AnimatePresence>
-                {confirmPwd && !pwdMatch && (
-                  <motion.p
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="text-[11px] mt-1"
-                    style={{ color: t.danger }}
-                  >
-                    Passwords do not match.
-                  </motion.p>
-                )}
-                {pwdMatch && (
-                  <motion.p
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="text-[11px] mt-1"
-                    style={{ color: t.green2 }}
-                  >
-                    ✓ Passwords match
-                  </motion.p>
-                )}
-              </AnimatePresence>
-            </FormGroup>
-
             {/* Consents */}
             <div className="mt-4 mb-2">
               <div
@@ -1143,7 +1035,7 @@ function RegisterView() {
               <motion.button
                 whileHover={{ borderColor: t.green, color: t.green2 }}
                 onClick={() => setStep(2)}
-                className="flex-shrink-0 flex items-center gap-1 rounded-lg px-4 py-[0.65rem] text-sm font-medium cursor-pointer"
+                className="shrink-0 flex items-center gap-1 rounded-lg px-4 py-[0.65rem] text-sm font-medium cursor-pointer"
                 style={{
                   background: "transparent",
                   color: t.ink3,
@@ -1170,6 +1062,16 @@ function RegisterView() {
 
 /* ─── ROOT COMPONENT ─── */
 export default function WabauAuth() {
+  // checks if user is authenticated
+  useLayoutEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      redirect("/login");
+      return;
+    }
+  }, []);
+
   return (
     <>
       <div className="flex flex-col justify-center min-h-screen">
@@ -1177,9 +1079,9 @@ export default function WabauAuth() {
         <div className="">
           {/* RIGHT: Form */}
           <div className="flex flex-col overflow-y-auto">
-            <div className="flex-1 flex flex-col justify-center px-8 py-10 w-full max-w-130 mx-auto">
+            <div className="flex-1 flex flex-col justify-center px-8 py-10 w-full max-w-xl xl:max-w-2xl mx-auto">
               <AnimatePresence mode="wait">
-                <RegisterView key="register" />
+                <UserRegister key="register" />
               </AnimatePresence>
             </div>
           </div>
