@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useRef,
-  useLayoutEffect,
-  useContext,
-  useEffect,
-} from "react";
+import { useState, useLayoutEffect, useContext, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
@@ -15,10 +9,8 @@ import {
   XCircle,
   EyeOff,
   ArrowRight,
-  ArrowLeft,
   Check,
   User,
-  Building2,
   Globe,
   BookOpen,
   Microscope,
@@ -35,8 +27,8 @@ import {
   Loader,
 } from "lucide-react";
 import { redirect, useRouter } from "next/navigation";
-import { supabase2 } from "@/Config/Supabase";
 import DataContext from "@/Context/DataContext";
+import { supabase2 } from "@/Config/Supabase";
 
 /* ─── THEME TOKENS ─── */
 const t = {
