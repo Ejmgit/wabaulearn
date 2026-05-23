@@ -627,6 +627,7 @@ function LeftPanel({ quotes }) {
         }}
       >
         {quotes[val]?.quote}
+        {/* — {quotes[val]?.author} */}
       </motion.blockquote>
       <motion.p
         custom={2}
