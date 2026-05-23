@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { UserProvider } from "./../Context/UserContext";
+import { DataProvider } from "@/Context/DataContext";
 
 export const metadata: Metadata = {
   title: "Wabau learn",
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-[#0c0f0e] overflow-x-hidden flex flex-col">
-        <UserProvider>{children}</UserProvider>
+        <DataProvider>
+          <UserProvider>{children}</UserProvider>
+        </DataProvider>
       </body>
     </html>
   );

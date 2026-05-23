@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, useRef, useLayoutEffect } from "react";
+import {
+  useState,
+  useRef,
+  useLayoutEffect,
+  useContext,
+  useEffect,
+} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
@@ -30,6 +36,7 @@ import {
 } from "lucide-react";
 import { redirect, useRouter } from "next/navigation";
 import { supabase2 } from "@/Config/Supabase";
+import DataContext from "@/Context/DataContext";
 
 /* ─── THEME TOKENS ─── */
 const t = {
@@ -494,7 +501,9 @@ function StepIndicator({ current }) {
 }
 
 /* ─── LEFT PANEL ─── */
-function LeftPanel() {
+function LeftPanel({ quotes }) {
+  const [val, setVal] = useState(Math.floor(Math.random() * 100) + 1 || 5);
+
   const stats = [
     { n: "14K+", l: "African clinicians", Icon: Users },
     { n: "1,240", l: "Clinical protocols", Icon: FileText },
@@ -523,9 +532,20 @@ function LeftPanel() {
     },
   ];
 
+  // val change after every 5seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newVal = Math.floor(Math.random() * 100) + 1 || 5;
+      setVal(newVal);
+    }, 10000); // 5000ms = 5 seconds
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div
-      className="hidden md:flex flex-col p-12 relative overflow-hidden"
+      className="hidden md:flex flex-col p-12 relative w-full overflow-hidden"
       style={{
         background: t.green4,
         borderRight: `1px solid rgba(61,158,114,0.3)`,
@@ -606,8 +626,7 @@ function LeftPanel() {
           maxWidth: 380,
         }}
       >
-        "The ancient Wabau carried the knowledge of healing as a sacred trust.
-        We carry it forward."
+        {quotes[val]?.quote}
       </motion.blockquote>
       <motion.p
         custom={2}
@@ -1590,6 +1609,7 @@ function ForgotView({ onBack }) {
 /* ─── ROOT COMPONENT ─── */
 export default function WabauAuth() {
   const [view, setView] = useState("login"); // "login" | "register" | "forgot"
+  const { quotes } = useContext(DataContext);
 
   // checks if user is authenticated
   useLayoutEffect(() => {
@@ -1603,11 +1623,6 @@ export default function WabauAuth() {
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap');}
-        select option { background: #222826; }
-      `}</style>
-
       <div
         className="flex flex-col min-h-screen"
         style={{
@@ -1616,70 +1631,17 @@ export default function WabauAuth() {
           fontFamily: "'Outfit', sans-serif",
         }}
       >
-        {/* ── TOPBAR ── */}
-        <header
-          className="flex items-center justify-between px-8 h-[52px] shrink-0 z-10"
-          style={{
-            background: t.surface,
-            borderBottom: `1px solid ${t.border}`,
-          }}
-        >
-          <div className="flex items-baseline gap-2 cursor-pointer">
-            <span
-              style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "1.35rem",
-                fontWeight: 700,
-                color: t.ink,
-                letterSpacing: "0.08em",
-              }}
-            >
-              Wabau
-            </span>
-            <span
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.5rem",
-                letterSpacing: "0.4em",
-                textTransform: "uppercase",
-                color: t.green2,
-              }}
-            >
-              Learn
-            </span>
-          </div>
-          <div
-            className="flex items-center gap-1.5 text-[12.5px]"
-            style={{ color: t.ink3 }}
-          >
-            <span>Need help?</span>
-            <a
-              href="mailto:support@wabau.health"
-              className="hover:underline"
-              style={{ color: t.green2 }}
-            >
-              support@wabau.health
-            </a>
-            <span className="mx-1" style={{ color: t.border }}>
-              ·
-            </span>
-            <a href="#" className="hover:underline" style={{ color: t.green2 }}>
-              wabau.health
-            </a>
-          </div>
-        </header>
-
         {/* ── MAIN SPLIT ── */}
-        <div className="flex-1 grid md:grid-cols-2 min-h-0">
-          <LeftPanel />
+        <div className="flex flex-col md:flex-row min-h-screen">
+          <LeftPanel quotes={quotes} />
 
           {/* RIGHT: Form */}
-          <div className="flex flex-col overflow-y-auto">
-            <div className="flex-1 flex flex-col justify-center px-8 py-10 w-full max-w-[520px] mx-auto">
+          <div className="flex flex-col w-full overflow-y-auto">
+            <div className="flex-1 flex flex-col justify-center px-8 py-10 w-full max-w-130 mx-auto">
               {/* Tab Switcher — only for login/register */}
               {view !== "forgot" && (
                 <div
-                  className="grid grid-cols-2 rounded-lg p-[3px] mb-8"
+                  className="grid grid-cols-2 rounded-lg p-0.75 mb-8"
                   style={{
                     background: t.surface2,
                     border: `1px solid ${t.border}`,
