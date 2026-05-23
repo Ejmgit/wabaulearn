@@ -1099,8 +1099,13 @@ function RegisterView({ onSwitch }) {
   };
 
   const handleClose = () => {
-    setNotification(false);
+    setNotifications(false);
     setLoading(false);
+    setData({
+      email: "",
+      password: "",
+      password2: "",
+    });
   };
 
   // resend verification email
@@ -1114,11 +1119,6 @@ function RegisterView({ onSwitch }) {
       setIsLoading(false);
     } else {
       setIsLoading(false);
-      setData({
-        email: "",
-        password: "",
-        password2: "",
-      });
     }
   };
 
@@ -1372,12 +1372,12 @@ function RegisterView({ onSwitch }) {
       </AnimatePresence>
 
       {showNotification && (
-        <div className="absolute top-0 right-0 left-0 flex flex-col h-full items-center justify-center bottom-0 bg-inherit backdrop-blur-lg">
+        <div className="absolute top-0 right-0 left-0 flex flex-col h-full items-center justify-center bottom-0 bg-inherit">
           <motion.div
             initial={{ y: -50 }}
             animate={{ y: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className=" relative w-full max-w-md p-8 mx-4 bg-white rounded-lg shadow-2xl "
+            className=" relative w-full max-w-sm p-8 mx-4 bg-white rounded-lg shadow-2xl "
           >
             <div className="flex flex-col items-center text-center">
               <MotionCheckCircle
@@ -1422,7 +1422,7 @@ function RegisterView({ onSwitch }) {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleClick(userData?.email)}
-                className="flex items-center cursor-pointer justify-center px-6 py-2 space-x-2 font-medium text-white transition-colors duration-300 bg-blue-500 rounded-full hover:bg-blue-600"
+                className="flex items-center cursor-pointer justify-center px-6 py-2 space-x-2 font-medium text-white transition-colors duration-300 bg-green-600 rounded-full hover:bg-blue-600"
                 disabled={isLoading}
               >
                 {isLoading ? (
