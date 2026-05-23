@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 function LoadingPage() {
   const [progress, setProgress] = useState(0);
   const pathname = usePathname();
-  const { userData } = useContext(UserContext);
+  const { profile } = useContext(UserContext);
   const route = useRouter();
 
   // ⏳ Progress bar animation
@@ -32,12 +32,12 @@ function LoadingPage() {
   useEffect(() => {
     if (progress !== 100) return;
 
-    if (userData?.length > 0) {
+    if (profile !== null) {
       route.push("/");
     } else {
       route.push("/register");
     }
-  }, [progress, userData, route]);
+  }, [profile, progress, route]);
 
   return (
     <div className="flex flex-col bg-[#0c0f0e] items-center justify-center min-h-screen">
