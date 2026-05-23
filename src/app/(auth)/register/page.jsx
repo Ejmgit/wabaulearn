@@ -1080,15 +1080,19 @@ function UserRegister() {
 
 /* ─── ROOT COMPONENT ─── */
 export default function WabauAuth() {
+  const { profile } = useContext(UserContext);
+
   // checks if user is authenticated
   useLayoutEffect(() => {
     const token = localStorage.getItem("token");
 
     if (!token) {
       redirect("/login");
-      return;
     }
-  }, []);
+    if (profile) {
+      redirect("/");
+    }
+  }, [profile]);
 
   return (
     <>
