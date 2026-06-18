@@ -795,6 +795,7 @@ function LoginView({ onSwitch, onForgot }) {
   };
 
   const handleLogin = () => {
+    setNotification({ type: "", message: "" });
     const errs = {};
     if (!email || !email.includes("@"))
       errs.email = "Please enter a valid email address.";
@@ -938,13 +939,14 @@ function LoginView({ onSwitch, onForgot }) {
         </div>
       </FormGroup>
 
-      <CheckRow
+      {/* <CheckRow
         id="remember"
+        
         checked={remember}
         onChange={(e) => setRemember(e.target.checked)}
       >
         Keep me signed in on this device
-      </CheckRow>
+      </CheckRow> */}
 
       {/* Notification section */}
       {notification.message && (
