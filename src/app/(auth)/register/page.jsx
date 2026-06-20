@@ -720,13 +720,13 @@ function UserRegister() {
               <FormGroup label="First name" error={error?.firstName}>
                 <input
                   type="text"
-                  placeholder="Amara"
+                  placeholder="eg Mhando"
                   value={firstName}
                   onChange={(e) => {
                     setFirstName(e.target.value);
                     setError((p) => ({ ...p, firstName: "" }));
                   }}
-                  className="w-full rounded-lg px-3 py-[0.68rem] text-sm outline-none"
+                  className="w-full rounded-lg px-3  py-[0.68rem] text-sm outline-none"
                   style={{
                     background: error.firstName
                       ? "rgba(58,16,16,0.3)"
@@ -750,7 +750,7 @@ function UserRegister() {
               <FormGroup label="Last name" error={error?.lastName}>
                 <input
                   type="text"
-                  placeholder="Osei-Bonsu"
+                  placeholder="eg Zuberi"
                   value={lastName}
                   onChange={(e) => {
                     setLastName(e.target.value);
@@ -810,7 +810,7 @@ function UserRegister() {
                 </span>
                 <input
                   type="text"
-                  placeholder="e.g. Kenyatta National Hospital, Nairobi"
+                  placeholder="e.g. Muhimbili University of Health and Allied Sciences"
                   value={institution}
                   onChange={(e) => {
                     setInstitution(e.target.value);
