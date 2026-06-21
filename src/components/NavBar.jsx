@@ -59,7 +59,7 @@ export default function Navbar() {
     .toUpperCase();
 
   return (
-    <nav className="w-full bg-[#15171a] border-b border-white/5 px-6 py-3 font-sans">
+    <nav className="w-full top-0 sticky z-50 bg-[#15171a] border-b border-white/5 px-6 py-3 font-sans">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-baseline gap-2 shrink-0 group">
