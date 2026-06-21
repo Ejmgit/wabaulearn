@@ -1,21 +1,3 @@
-// "use client";
-
-// import React, { useContext, useEffect } from "react";
-// import UserContext from "../Context/UserContext";
-// import { usePathname } from "next/navigation";
-
-// function NavBar() {
-//   //   const { profile } = useContext(UserContext);
-//   const pathname = usePathname();
-
-//   return (
-//     <div className={`${pathname === "/login" ? "hidden" : ""}`}>
-//       <div></div>
-//     </div>
-//   );
-// }
-
-// export default NavBar;
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
@@ -118,7 +100,7 @@ export default function Navbar() {
                 {isActive && (
                   <motion.div
                     layoutId="navPill"
-                    className="absolute inset-0 bg-white/[0.06] rounded-md"
+                    className="absolute inset-0 bg-white/6 rounded-md"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -145,7 +127,7 @@ export default function Navbar() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setMenuOpen((o) => !o)}
-                className="flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] transition-colors duration-200"
+                className="flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full bg-white/6 hover:bg-white/[0.1] transition-colors duration-200"
               >
                 <div
                   className="w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold text-[#102017]"
@@ -224,7 +206,7 @@ function DropdownItem({ icon, label, onClick, danger }) {
         className={`w-full flex items-center gap-3 px-4 py-2.5 text-[14px] transition-colors duration-150 ${
           danger
             ? "text-red-400 hover:bg-red-500/10"
-            : "text-gray-300 hover:bg-white/[0.06] hover:text-white"
+            : "text-gray-300 hover:bg-white/6 hover:text-white"
         }`}
       >
         <span className={danger ? "text-red-400" : "text-gray-400"}>
