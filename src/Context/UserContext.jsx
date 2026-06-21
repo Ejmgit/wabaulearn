@@ -92,7 +92,6 @@ export function UserProvider({ children }) {
       value={{
         user,
         profile,
-        profile,
         loading,
         setUser,
         getUser,
