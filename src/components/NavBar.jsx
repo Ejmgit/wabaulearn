@@ -127,7 +127,7 @@ export default function Navbar() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setMenuOpen((o) => !o)}
-                className="flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full bg-white/6 hover:bg-white/[0.1] transition-colors duration-200"
+                className="flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full bg-white/6 hover:bg-white/1 transition-colors duration-200"
               >
                 <div
                   className="w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold text-[#102017]"
