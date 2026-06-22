@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import UserContext from "@/Context/UserContext";
 import { supabase2 } from "@/Config/Supabase";
 
 const NAV_LINKS = [
@@ -51,7 +50,6 @@ export default function Navbar() {
   const user = {
     name: profile?.full_name,
     email: profile?.email,
-    avatarColor: "#7CC9A0",
   };
 
   useEffect(() => {
@@ -135,15 +133,18 @@ export default function Navbar() {
         {/* Right side: auth area */}
         <div className="flex items-center">
           {!isLoggedIn ? (
-            <motion.button
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => setIsLoggedIn(true)}
-              className="flex cursor-pointer items-center gap-2 bg-[#7CC9A0] hover:bg-[#8fd4ad] text-[#102017] text-[14px] font-semibold px-4 py-2 rounded-md transition-colors duration-200"
-            >
-              <LogIn size={16} strokeWidth={2.5} />
-              Login/Register
-            </motion.button>
+            <>
+              <Link href={"/login"}>
+                <motion.button
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="flex cursor-pointer items-center gap-2 bg-[#7CC9A0] hover:bg-[#8fd4ad] text-[#102017] text-[14px] font-semibold px-4 py-2 rounded-md transition-colors duration-200"
+                >
+                  <LogIn size={16} strokeWidth={2.5} />
+                  Login/Register
+                </motion.button>
+              </Link>
+            </>
           ) : (
             <div className="relative" ref={menuRef}>
               <motion.button
@@ -213,7 +214,6 @@ export default function Navbar() {
                         label="Logout"
                         danger
                         onClick={() => {
-                          setIsLoggedIn(false);
                           setMenuOpen(false);
                         }}
                       />
