@@ -1328,8 +1328,8 @@ export default function WabauAuth() {
           <LeftPanel quotes={quotes} />
 
           {/* RIGHT: Form */}
-          <div className="flex flex-col w-full overflow-y-auto">
-            <div className="flex-1 flex flex-col justify-center px-8 py-10 w-full max-w-130 mx-auto">
+          <div className="flex  flex-col w-full overflow-y-auto">
+            <div className="flex-1 mt-10 md:mt-0 flex flex-col justify-center px-8 py-10 w-full max-w-130 mx-auto">
               {/* Tab Switcher — only for login/register */}
               {view !== "forgot" && (
                 <motion.div
