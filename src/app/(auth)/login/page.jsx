@@ -1331,13 +1331,20 @@ export default function WabauAuth() {
 
           {/* RIGHT: Form */}
           <div className="flex flex-col w-full overflow-y-auto">
-            <Link
-              href={"/"}
-              className="text-gray-400 hidden items-center gap-2 md:flex py-2 px-4 rounded-xl  border-gray-600 ml-3 cursor-pointer text-sm mt-2"
+            <motion.div
+              variants={viewVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
             >
-              <FaHome />
-              Home
-            </Link>
+              <Link
+                href={"/"}
+                className="text-gray-400 hidden items-center gap-2 md:flex py-2 px-4 rounded-xl  border-gray-600 ml-3 cursor-pointer text-sm mt-2"
+              >
+                <FaHome />
+                Home
+              </Link>
+            </motion.div>
             <div className="flex-1 mt-10 md:mt-0 flex flex-col justify-center px-8 py-10 w-full max-w-130 mx-auto">
               {/* Tab Switcher — only for login/register */}
               {view !== "forgot" && (
