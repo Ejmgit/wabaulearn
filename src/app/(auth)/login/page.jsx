@@ -575,7 +575,7 @@ function LeftPanel({ quotes }) {
         variants={panelItemVariants}
         initial="hidden"
         animate="visible"
-        className="mb-auto"
+        className="mb-auto "
       >
         <div
           style={{
@@ -816,7 +816,7 @@ function LoginView({ onSwitch, onForgot }) {
       animate="visible"
       exit="exit"
     >
-      <div className="mb-7">
+      <div className="mb-7 ">
         <h2
           style={{
             fontFamily: "'Playfair Display', serif",

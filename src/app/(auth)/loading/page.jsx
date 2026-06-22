@@ -33,9 +33,9 @@ function LoadingPage() {
     if (progress !== 100) return;
 
     if (profile !== null) {
-      route.push("/");
+      // route.push("/");
     } else {
-      route.push("/register");
+      // route.push("/register");
     }
   }, [profile, progress, route]);
 
@@ -46,7 +46,7 @@ function LoadingPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <h1 className="text-6xl md:text-8xl font-Playfair text-white">
+        <h1 className="text-5xl md:text-6xl font-Playfair text-white">
           Wabau.
         </h1>
       </motion.div>
@@ -56,7 +56,7 @@ function LoadingPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="w-full max-w-52 md:max-w-72 h-2 bg-gray-200 rounded-full overflow-hidden"
+          className="w-full max-w-44 md:max-w-48 h-2 bg-gray-200 rounded-full overflow-hidden"
         >
           <div
             className="h-full bg-green-400 transition-all duration-100 ease-linear"
