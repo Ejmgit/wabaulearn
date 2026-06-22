@@ -9,6 +9,9 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState([]);
+
+  //
 
   // get authenticated user + profile
   const getUser = async () => {
@@ -44,6 +47,7 @@ export function UserProvider({ children }) {
         console.error("Profile fetch error:", error.message);
       } else {
         setProfile(data);
+        setUserData(data);
       }
     } catch (error) {
       console.error("User fetch error:", error.message);
@@ -93,6 +97,7 @@ export function UserProvider({ children }) {
         user,
         profile,
         loading,
+        userData,
         setUser,
         getUser,
       }}

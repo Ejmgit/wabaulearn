@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   User,
@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import UserContext from "@/Context/UserContext";
 
 const NAV_LINKS = [
   { label: "Clinical News", href: "/" },
@@ -22,6 +23,7 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const { userData } = useContext(UserContext);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
@@ -61,7 +63,7 @@ export default function Navbar() {
 
   return (
     <nav className="w-full top-0 sticky z-50 bg-[#15171a] border-b border-white/5 px-6 py-3 font-sans">
-      <div className="container mx-auto flex items-center justify-between">
+      <div className="xl:container  mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-baseline gap-2 shrink-0 group">
           <span
