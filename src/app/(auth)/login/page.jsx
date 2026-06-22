@@ -64,6 +64,15 @@ const viewVariants = {
   exit: { opacity: 0, y: -8, transition: { duration: 0.18 } },
 };
 
+const panelItemVariants = {
+  hidden: { opacity: 0, x: -16 },
+  visible: (i) => ({
+    opacity: 1,
+    x: 0,
+    transition: { delay: 0.1 + i * 0.08, duration: 0.35, ease: "easeOut" },
+  }),
+};
+
 /* ─── PASSWORD STRENGTH ─── */
 function calcStrength(v) {
   let score = 0;
