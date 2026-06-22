@@ -143,13 +143,13 @@ export default function Navbar() {
         .slice(0, 2)
     : "?";
 
-  const paths = ["/login", "/loading"];
+  const paths = ["/login", "/loading", "/dashboard", "dashboard/userprofile"];
 
   return (
     <nav
       className={`${
         paths.includes(pathname) ? "hidden" : ""
-      } w-full top-0 sticky z-50 bg-[#15171a] border-b border-white/5 px-6 py-3 font-sans`}
+      } ${pathname.startsWith("/studio") ? "hidden" : ""} w-full top-0 sticky z-50 bg-[#15171a] border-b border-white/5 px-6 py-3 font-sans`}
     >
       <div className="xl:container mx-auto flex items-center justify-between">
         {/* Logo */}
