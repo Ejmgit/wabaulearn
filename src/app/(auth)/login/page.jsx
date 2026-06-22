@@ -1332,12 +1332,16 @@ export default function WabauAuth() {
             <div className="flex-1 flex flex-col justify-center px-8 py-10 w-full max-w-130 mx-auto">
               {/* Tab Switcher — only for login/register */}
               {view !== "forgot" && (
-                <div
+                <motion.div
                   className="grid grid-cols-2 rounded-lg p-0.75 mb-8"
                   style={{
                     background: t.surface2,
                     border: `1px solid ${t.border}`,
                   }}
+                  variants={viewVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
                 >
                   {["login", "register"].map((tab) => (
                     <motion.button
@@ -1360,7 +1364,7 @@ export default function WabauAuth() {
                       {tab === "login" ? "Sign in" : "Create account"}
                     </motion.button>
                   ))}
-                </div>
+                </motion.div>
               )}
 
               <AnimatePresence mode="wait">
