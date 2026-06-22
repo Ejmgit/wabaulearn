@@ -60,7 +60,7 @@ export default function Navbar() {
 
   return (
     <nav className="w-full top-0 sticky z-50 bg-[#15171a] border-b border-white/5 px-6 py-3 font-sans">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-baseline gap-2 shrink-0 group">
           <span
@@ -119,7 +119,7 @@ export default function Navbar() {
               className="flex items-center gap-2 bg-[#7CC9A0] hover:bg-[#8fd4ad] text-[#102017] text-[14px] font-semibold px-4 py-2 rounded-md transition-colors duration-200"
             >
               <LogIn size={16} strokeWidth={2.5} />
-              Login
+              Login/Register
             </motion.button>
           ) : (
             <div className="relative" ref={menuRef}>
