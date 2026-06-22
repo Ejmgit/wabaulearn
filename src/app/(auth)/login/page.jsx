@@ -245,7 +245,7 @@ function LeftPanel({ quotes }) {
 
   return (
     <div
-      className="hidden md:flex flex-col p-12 relative w-full overflow-hidden"
+      className="hidden md:flex flex-col px-9 py-2 relative w-full overflow-hidden"
       style={{
         background: t.green4,
         borderRight: `1px solid rgba(61,158,114,0.3)`,
