@@ -9,13 +9,14 @@ import {
   ChevronDown,
   LogIn,
 } from "lucide-react";
+import Link from "next/link";
 
 const NAV_LINKS = [
-  { label: "Clinical News", href: "#" },
-  { label: "Reference", href: "#" },
-  { label: "CME", href: "#" },
-  { label: "Cases", href: "#", active: true },
-  { label: "Drugs", href: "#" },
+  { label: "Clinical News", href: "/" },
+  { label: "Reference", href: "/reference" },
+  { label: "CME", href: "/cve" },
+  { label: "Cases", href: "/cases", active: true },
+  { label: "Drugs", href: "/drugs" },
 ];
 
 export default function Navbar() {
@@ -62,7 +63,7 @@ export default function Navbar() {
     <nav className="w-full top-0 sticky z-50 bg-[#15171a] border-b border-white/5 px-6 py-3 font-sans">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-baseline gap-2 shrink-0 group">
+        <Link href="/" className="flex items-baseline gap-2 shrink-0 group">
           <span
             className="text-[26px] leading-none text-[#f3f1ea] tracking-tight group-hover:text-white transition-colors"
             style={{
@@ -75,20 +76,16 @@ export default function Navbar() {
           <span className="text-[10px] tracking-[0.25em] text-[#7CC9A0] font-semibold">
             LEARN
           </span>
-        </a>
+        </Link>
 
         {/* Center nav links */}
         <ul className="hidden md:flex items-center gap-1">
-          {NAV_LINKS.map((link) => {
+          {NAV_LINKS?.map((link) => {
             const isActive = activeLink === link.label;
             return (
-              <li key={link.label} className="relative">
-                <a
+              <li key={link?.label} className="relative">
+                <Link
                   href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveLink(link.label);
-                  }}
                   className={`relative z-10 block px-4 py-2 text-[14px] font-medium rounded-md transition-colors duration-200 ${
                     isActive
                       ? "text-[#7CC9A0]"
@@ -96,7 +93,7 @@ export default function Navbar() {
                   }`}
                 >
                   {link.label}
-                </a>
+                </Link>
                 {isActive && (
                   <motion.div
                     layoutId="navPill"
