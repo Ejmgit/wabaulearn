@@ -200,7 +200,7 @@ function DropdownItem({ icon, label, onClick, danger }) {
     <li>
       <button
         onClick={onClick}
-        className={`w-full flex items-center gap-3 px-4 py-2.5 text-[14px] transition-colors duration-150 ${
+        className={`w-full cursor-pointer flex items-center gap-3 px-4 py-2.5 text-[14px] transition-colors duration-150 ${
           danger
             ? "text-red-400 hover:bg-red-500/10"
             : "text-gray-300 hover:bg-white/6 hover:text-white"
