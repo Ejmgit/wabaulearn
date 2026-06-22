@@ -10,22 +10,21 @@ import {
   LogIn,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
   { label: "Clinical News", href: "/" },
   { label: "Reference", href: "/reference" },
   { label: "CME", href: "/cve" },
-  { label: "Cases", href: "/cases", active: true },
+  { label: "Cases", href: "/cases" },
   { label: "Drugs", href: "/drugs" },
 ];
 
 export default function Navbar() {
-  // Demo-only auth state so the component is self-contained.
-  // Wire `isLoggedIn` / `user` up to real auth state in your app.
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState("Cases");
   const menuRef = useRef(null);
+  const pathname = usePathname();
 
   const user = {
     name: "Amara Quinn",
@@ -81,7 +80,7 @@ export default function Navbar() {
         {/* Center nav links */}
         <ul className="hidden md:flex items-center gap-1">
           {NAV_LINKS?.map((link) => {
-            const isActive = activeLink === link.label;
+            const isActive = pathname === link.href;
             return (
               <li key={link?.label} className="relative">
                 <Link
