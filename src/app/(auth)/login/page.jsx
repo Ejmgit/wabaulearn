@@ -64,113 +64,6 @@ const viewVariants = {
   exit: { opacity: 0, y: -8, transition: { duration: 0.18 } },
 };
 
-const stepVariants = {
-  hidden: { opacity: 0, x: 20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.26, ease: "easeOut" },
-  },
-  exit: { opacity: 0, x: -20, transition: { duration: 0.18 } },
-};
-
-const panelItemVariants = {
-  hidden: { opacity: 0, x: -16 },
-  visible: (i) => ({
-    opacity: 1,
-    x: 0,
-    transition: { delay: 0.1 + i * 0.08, duration: 0.35, ease: "easeOut" },
-  }),
-};
-
-/* ─── COUNTRY LIST ─── */
-const COUNTRIES = {
-  "East Africa": [
-    "Kenya",
-    "Uganda",
-    "Tanzania",
-    "Ethiopia",
-    "Rwanda",
-    "Burundi",
-  ],
-  "West Africa": ["Nigeria", "Ghana", "Senegal", "Côte d'Ivoire", "Cameroon"],
-  "Southern Africa": [
-    "South Africa",
-    "Zambia",
-    "Zimbabwe",
-    "Malawi",
-    "Mozambique",
-  ],
-  "North Africa": ["Egypt", "Sudan", "Morocco"],
-  Other: ["Other African country", "Outside Africa"],
-};
-
-/* ─── SPECIALTIES ─── */
-const SPECIALTIES = [
-  "Infectious Diseases",
-  "Internal Medicine / General Medicine",
-  "Paediatrics",
-  "Emergency Medicine",
-  "Obstetrics & Gynaecology",
-  "Surgery (General)",
-  "Cardiology",
-  "Oncology",
-  "Neurology",
-  "Psychiatry",
-  "Radiology",
-  "Anaesthesiology",
-  "Pharmacology",
-  "Public Health / Epidemiology",
-  "Other",
-];
-
-/* ─── ROLES ─── */
-const ROLES = [
-  {
-    id: "physician",
-    Icon: Stethoscope,
-    title: "Physician / Doctor",
-    sub: "MD, MBChB, or equivalent",
-  },
-  {
-    id: "nurse",
-    Icon: User,
-    title: "Nurse / NP",
-    sub: "RN, BSN, advanced practice",
-  },
-  {
-    id: "clinical_officer",
-    Icon: ShieldCheck,
-    title: "Clinical Officer",
-    sub: "CO, ACO, or equivalent",
-  },
-  { id: "pharmacist", Icon: Pill, title: "Pharmacist", sub: "BPharm, PharmD" },
-  {
-    id: "student",
-    Icon: GraduationCap,
-    title: "Medical Student",
-    sub: "Undergraduate or postgraduate",
-  },
-  {
-    id: "researcher",
-    Icon: Microscope,
-    title: "Researcher",
-    sub: "Clinical or public health",
-  },
-  {
-    id: "public_health",
-    Icon: BarChart3,
-    title: "Public Health",
-    sub: "MOH, NGO, global health",
-  },
-  {
-    id: "health_tech",
-    Icon: Cpu,
-    title: "Health Technology",
-    sub: "Digital health, HIT",
-  },
-];
-
 /* ─── PASSWORD STRENGTH ─── */
 function calcStrength(v) {
   let score = 0;
@@ -188,13 +81,6 @@ const STRENGTH_LABELS = [
   "Strong ✓",
 ];
 const STRENGTH_COLORS = ["", t.danger, t.gold2, t.green, t.green2];
-const STRENGTH_BAR_COLORS = [
-  "bg-[#8a2020]",
-  "bg-[#8a2020]",
-  "bg-amber-400",
-  "bg-[#52c48e]",
-  "bg-[#52c48e]",
-];
 
 /* ─── LABEL ─── */
 function Label({ children, right }) {
