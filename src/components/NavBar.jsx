@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import UserContext from "@/Context/UserContext";
+import { supabase2 } from "@/Config/Supabase";
 
 const NAV_LINKS = [
   { label: "Clinical News", href: "/" },
@@ -23,17 +24,40 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const { userData } = useContext(UserContext);
-
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userData, setUserdata] = useState([]);
+  const [profile, setProfile] = useState([]);
   const menuRef = useRef(null);
   const pathname = usePathname();
 
+  const getProfile = async () => {
+    const { data, error } = await supabase2?.from("profile").select("*");
+    if (!error) {
+      const dtb = data?.find((dt, user) => user?.id === userData?.id);
+      setProfile(dtb);
+    }
+  };
+
+  const getUser = async () => {
+    const {
+      data: { user },
+    } = await supabase2.auth.getUser();
+    setUserdata({
+      id: user?.id,
+      email: user?.email,
+    });
+  };
+
   const user = {
-    name: "Amara Quinn",
-    email: "amara.quinn@wabau.com",
+    name: profile?.full_name,
+    email: profile?.email,
     avatarColor: "#7CC9A0",
   };
+
+  useEffect(() => {
+    getUser();
+    getProfile();
+  }, []);
 
   // close dropdown on outside click
   useEffect(() => {
@@ -55,11 +79,11 @@ export default function Navbar() {
     return () => document.removeEventListener("keydown", handleKey);
   }, []);
 
-  const initials = user.name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase();
+  const initials = user?.name
+    ?.split(" ")
+    ?.map((n) => n[0])
+    ?.join("")
+    ?.toUpperCase();
 
   return (
     <nav className="w-full top-0 sticky z-50 bg-[#15171a] border-b border-white/5 px-6 py-3 font-sans">
@@ -126,15 +150,15 @@ export default function Navbar() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setMenuOpen((o) => !o)}
-                className="flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full bg-white/6 hover:bg-white/1 transition-colors duration-200"
+                className="flex cursor-pointer items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full bg-white/6 hover:bg-white/1 transition-colors duration-200"
               >
                 <div
                   className="w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold text-[#102017]"
-                  style={{ backgroundColor: user.avatarColor }}
+                  style={{ backgroundColor: "#7CC9A0" }}
                 >
                   {initials}
                 </div>
-                <span className="text-[14px] text-gray-200 font-medium hidden sm:block">
+                <span className="text-[14px] hidden text-gray-200 font-medium">
                   {user.name.split(" ")[0]}
                 </span>
                 <motion.span
