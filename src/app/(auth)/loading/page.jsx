@@ -33,9 +33,9 @@ function LoadingPage() {
     if (progress !== 100) return;
 
     if (profile !== null) {
-      // route.push("/");
+      route.push("/");
     } else {
-      // route.push("/register");
+      route.push("/register");
     }
   }, [profile, progress, route]);
 
