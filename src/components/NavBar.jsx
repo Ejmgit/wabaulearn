@@ -179,13 +179,21 @@ export default function Navbar() {
                     transition={{ duration: 0.16, ease: "easeOut" }}
                     className="absolute right-0 mt-2 w-56 bg-[#1c1f23] border border-white/10 rounded-lg shadow-2xl overflow-hidden origin-top-right z-50"
                   >
-                    <div className="px-4 py-3 border-b border-white/5">
-                      <p className="text-[14px] font-semibold text-gray-100 truncate">
-                        {user.name}
-                      </p>
-                      <p className="text-[12px] text-gray-500 truncate">
-                        {user.email}
-                      </p>
+                    <div className="px-4 py-3 flex gap-x-3 items-center border-b border-white/5">
+                      <div
+                        className="w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold text-[#102017]"
+                        style={{ backgroundColor: "#7CC9A0" }}
+                      >
+                        {initials}
+                      </div>
+                      <div>
+                        <p className="text-[14px] font-semibold text-gray-100 truncate">
+                          {user.name}
+                        </p>
+                        <p className="text-[12px] text-gray-500 truncate">
+                          {user.email}
+                        </p>
+                      </div>
                     </div>
 
                     <ul className="py-1">
