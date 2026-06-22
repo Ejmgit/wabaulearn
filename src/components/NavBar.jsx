@@ -83,8 +83,13 @@ export default function Navbar() {
     ?.join("")
     ?.toUpperCase();
 
+  // restricted paths
+  const paths = ["/login", "/loading"];
+
   return (
-    <nav className="w-full top-0 sticky z-50 bg-[#15171a] border-b border-white/5 px-6 py-3 font-sans">
+    <nav
+      className={`${paths?.includes(pathname) ? "hidden" : ""} w-full top-0 sticky z-50 bg-[#15171a] border-b border-white/5 px-6 py-3 font-sans`}
+    >
       <div className="xl:container  mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-baseline gap-2 shrink-0 group">
