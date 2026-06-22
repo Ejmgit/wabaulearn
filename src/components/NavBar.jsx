@@ -163,7 +163,7 @@ export default function Navbar() {
           >
             Wabau
           </span>
-          <span className="text-[10px] tracking-[0.25em] text-[#7CC9A0] font-semibold">
+          <span className="text-[10px] tracking-[0.25em] text-[#129e5f] font-semibold">
             LEARN
           </span>
         </Link>
@@ -203,7 +203,7 @@ export default function Navbar() {
               <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="hidden md:flex cursor-pointer items-center gap-2 bg-[#7CC9A0] hover:bg-[#8fd4ad] text-[#102017] text-[14px] font-semibold px-4 py-2 rounded-md transition-colors duration-200"
+                className="hidden md:flex cursor-pointer hover:text-black items-center text-white gap-2 bg-[#1a4a34] hover:bg-[#8fd4ad]  text-[14px] font-semibold px-4 py-2 rounded-md transition-colors duration-200"
               >
                 <LogIn size={16} strokeWidth={2.5} />
                 Login/Register
@@ -286,7 +286,7 @@ export default function Navbar() {
               {/* Auth section */}
               {!isLoggedIn ? (
                 <Link href="/login">
-                  <button className="w-full flex items-center justify-center gap-2 bg-[#7CC9A0] hover:bg-[#8fd4ad] text-[#102017] text-[14px] font-semibold px-4 py-2.5 rounded-md transition-colors duration-200">
+                  <button className="w-full flex items-center text-white justify-center gap-2 bg-[#1a4a34] hover:bg-[#8fd4ad] text-[14px] font-semibold px-4 py-2.5 rounded-md transition-colors duration-200">
                     <LogIn size={16} strokeWidth={2.5} />
                     Login / Register
                   </button>
