@@ -177,7 +177,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -8, scale: 0.97 }}
                     transition={{ duration: 0.16, ease: "easeOut" }}
-                    className="absolute right-0 mt-2 w-56 bg-[#1c1f23] border border-white/10 rounded-lg shadow-2xl overflow-hidden origin-top-right z-50"
+                    className="absolute right-0 mt-5 w-56 bg-[#1c1f23] border border-white/10 rounded-lg shadow-2xl overflow-hidden origin-top-right z-50"
                   >
                     <div className="px-4 py-3 flex gap-x-3 items-center border-b border-white/5">
                       <div
