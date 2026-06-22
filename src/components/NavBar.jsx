@@ -22,6 +22,7 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const pathname = usePathname();
@@ -112,7 +113,7 @@ export default function Navbar() {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => setIsLoggedIn(true)}
-              className="flex items-center gap-2 bg-[#7CC9A0] hover:bg-[#8fd4ad] text-[#102017] text-[14px] font-semibold px-4 py-2 rounded-md transition-colors duration-200"
+              className="flex cursor-pointer items-center gap-2 bg-[#7CC9A0] hover:bg-[#8fd4ad] text-[#102017] text-[14px] font-semibold px-4 py-2 rounded-md transition-colors duration-200"
             >
               <LogIn size={16} strokeWidth={2.5} />
               Login/Register
