@@ -62,7 +62,7 @@ export default function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-8 py-16 md:py-20">
+      <div className="relative z-10 w-full container mx-auto  py-16 md:py-20">
         {/* Eyebrow */}
         <motion.p
           variants={fadeIn(0)}
