@@ -87,14 +87,14 @@ export default function HeroSection() {
           variants={fadeUp(0.1)}
           initial="hidden"
           animate="visible"
-          className="text-[2.6rem] md:text-[3.2rem] font-bold leading-[1.12] tracking-tight text-white mb-5"
+          className="text-[2.6rem] md:text-[3rem] font-bold leading-[1.12] tracking-tight text-white mb-5"
           style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
         >
           Clinical intelligence,{" "}
           <em
             className="not-italic font-bold"
             style={{
-              fontStyle: "italic",
+              //   fontStyle: "italic",
               color: "#34d399",
               fontFamily: "'Georgia', 'Times New Roman', serif",
             }}
