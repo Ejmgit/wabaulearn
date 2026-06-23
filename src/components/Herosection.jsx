@@ -56,7 +56,7 @@ export default function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 w-full container mx-auto  py-16 md:py-20">
+      <div className="relative z-10 w-full xl:container px-5 mx-auto  py-16 md:py-20">
         {/* Eyebrow */}
         <motion.p
           variants={fadeIn(0)}
@@ -65,7 +65,7 @@ export default function HeroSection() {
           className="flex items-center gap-3 mb-5"
         >
           <span
-            className="block hidden h-px w-7"
+            className="  hidden h-px w-7"
             style={{ background: "rgba(52,211,153,0.6)" }}
           />
           <span

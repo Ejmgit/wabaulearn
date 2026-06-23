@@ -36,7 +36,7 @@ export const postType = defineType({
       of: [defineArrayMember({ type: "reference", to: { type: "category" } })],
     }),
     defineField({
-      name: "Review",
+      name: "review",
       type: "array",
       of: [defineArrayMember({ type: "reference", to: { type: "review" } })],
     }),
