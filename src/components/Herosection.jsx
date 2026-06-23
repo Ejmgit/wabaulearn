@@ -4,14 +4,6 @@ import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useState } from "react";
 
-// const TRENDING = [
-//   "Typhoid Fever",
-//   "Artemether-Lumefantrine",
-//   "XDR Typhoid resistance",
-//   "Postpartum haemorrhage",
-//   "Mpox guidelines 2026",
-// ];
-
 // Animation variants
 const fadeUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 24 },
@@ -156,47 +148,6 @@ export default function HeroSection() {
             Search
           </motion.button>
         </motion.div>
-
-        {/* Trending pills */}
-        {/* <motion.div
-          variants={fadeIn(0.45)}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-wrap items-center gap-2"
-        >
-          <span
-            className="text-[10px] font-semibold tracking-[0.18em] uppercase mr-1"
-            style={{ color: "rgba(255,255,255,0.35)" }}
-          >
-            Trending:
-          </span>
-          {TRENDING.map((tag, i) => (
-            <motion.button
-              key={tag}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.5 + i * 0.07,
-                duration: 0.4,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              whileHover={{
-                backgroundColor: "rgba(52,211,153,0.18)",
-                borderColor: "rgba(52,211,153,0.55)",
-                color: "#6ee7b7",
-                scale: 1.02,
-              }}
-              className="rounded-full px-3 py-1 text-xs font-medium transition-all duration-150 cursor-pointer"
-              style={{
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.15)",
-                color: "rgba(255,255,255,0.7)",
-              }}
-            >
-              {tag}
-            </motion.button>
-          ))}
-        </motion.div> */}
       </div>
     </section>
   );
