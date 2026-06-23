@@ -11,23 +11,11 @@ export const postType = defineType({
       name: "title",
       type: "string",
     }),
-    // defineField({
-    //   name: "slug",
-    //   type: "slug",
-    //   options: {
-    //     source: "title",
-    //   },
-    // }),
     defineField({
       name: "author",
       type: "reference",
       to: { type: "author" },
     }),
-    // defineField({
-    //   name: "authorId",
-    //   title: "Author ID",
-    //   type: "string",
-    // }),
     defineField({
       name: "mainImage",
       type: "image",
@@ -46,6 +34,11 @@ export const postType = defineType({
       name: "categories",
       type: "array",
       of: [defineArrayMember({ type: "reference", to: { type: "category" } })],
+    }),
+    defineField({
+      name: "Review",
+      type: "array",
+      of: [defineArrayMember({ type: "reference", to: { type: "review" } })],
     }),
     defineField({
       name: "publishedAt",
