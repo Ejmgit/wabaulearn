@@ -261,17 +261,17 @@ function ClinicalDetail({ post, onBack }: { post: Post; onBack: () => void }) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 40 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="min-h-screen bg-slate-950 text-white"
+      className="min-h-screen  text-white"
     >
       {/* Top nav */}
-      <div className="sticky top-0 z-10 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/60 px-4 py-3">
-        <button
+      <div className="sticky xl:container top-0 z-10 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/60 px-4 py-3">
+        <motion.button
           onClick={onBack}
           className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
         >
           <ArrowLeft size={14} />
           Back to feed
-        </button>
+        </motion.button>
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-8">
@@ -389,7 +389,7 @@ export default function ClinicalNews({ postData }: ClinicalNewsProps) {
   const [selected, setSelected] = useState<Post | null>(null);
 
   return (
-    <div className="">
+    <div>
       <AnimatePresence mode="wait">
         {selected ? (
           <ClinicalDetail
