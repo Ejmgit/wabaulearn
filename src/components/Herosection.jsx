@@ -71,7 +71,7 @@ export default function HeroSection() {
           className="flex items-center gap-3 mb-5"
         >
           <span
-            className="block h-px w-7"
+            className="block hidden h-px w-7"
             style={{ background: "rgba(52,211,153,0.6)" }}
           />
           <span
@@ -158,7 +158,7 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Trending pills */}
-        <motion.div
+        {/* <motion.div
           variants={fadeIn(0.45)}
           initial="hidden"
           animate="visible"
@@ -170,7 +170,7 @@ export default function HeroSection() {
           >
             Trending:
           </span>
-          {/* {TRENDING.map((tag, i) => (
+          {TRENDING.map((tag, i) => (
             <motion.button
               key={tag}
               initial={{ opacity: 0, y: 8 }}
@@ -195,8 +195,8 @@ export default function HeroSection() {
             >
               {tag}
             </motion.button>
-          ))} */}
-        </motion.div>
+          ))}
+        </motion.div> */}
       </div>
     </section>
   );
