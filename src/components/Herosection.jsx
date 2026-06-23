@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useState } from "react";
 
-const TRENDING = [
-  "Typhoid Fever",
-  "Artemether-Lumefantrine",
-  "XDR Typhoid resistance",
-  "Postpartum haemorrhage",
-  "Mpox guidelines 2026",
-];
+// const TRENDING = [
+//   "Typhoid Fever",
+//   "Artemether-Lumefantrine",
+//   "XDR Typhoid resistance",
+//   "Postpartum haemorrhage",
+//   "Mpox guidelines 2026",
+// ];
 
 // Animation variants
 const fadeUp = (delay = 0) => ({
@@ -170,7 +170,7 @@ export default function HeroSection() {
           >
             Trending:
           </span>
-          {TRENDING.map((tag, i) => (
+          {/* {TRENDING.map((tag, i) => (
             <motion.button
               key={tag}
               initial={{ opacity: 0, y: 8 }}
@@ -195,7 +195,7 @@ export default function HeroSection() {
             >
               {tag}
             </motion.button>
-          ))}
+          ))} */}
         </motion.div>
       </div>
     </section>
