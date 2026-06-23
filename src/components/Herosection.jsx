@@ -24,6 +24,7 @@ const fadeIn = (delay = 0) => ({
 
 export default function HeroSection() {
   const [query, setQuery] = useState("");
+  // Note Search results will be displayed on modal
 
   return (
     <section
