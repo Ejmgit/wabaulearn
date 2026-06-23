@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useState } from "react";
+import { IoSearchOutline } from "react-icons/io5";
 
 // Animation variants
 const fadeUp = (delay = 0) => ({
@@ -143,9 +144,10 @@ export default function HeroSection() {
           <motion.button
             whileHover={{ scale: 1.03, brightness: 1.1 }}
             whileTap={{ scale: 0.97 }}
-            className="rounded-lg px-5 py-3 text-sm cursor-pointer font-semibold text-white transition-all duration-150"
+            className="rounded-lg px-5 py-3 text-sm flex items-center gap-1 cursor-pointer font-semibold text-white transition-all duration-150"
             style={{ background: "#22c55e" }}
           >
+            <IoSearchOutline />
             Search
           </motion.button>
         </motion.div>
