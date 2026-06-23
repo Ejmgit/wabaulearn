@@ -1,11 +1,11 @@
-import { TagIcon } from "@sanity/icons";
+import { DocumentSheetIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 export const reviewType = defineType({
   name: "review",
   title: "Review",
   type: "document",
-  icon: TagIcon,
+  icon: DocumentSheetIcon,
   fields: [
     defineField({
       name: "title",
