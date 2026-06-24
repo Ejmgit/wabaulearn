@@ -394,11 +394,11 @@ function TableOfContents({ headings, activeId, onSelect }) {
 
   return (
     <nav aria-label="Table of contents">
-      <p className="text-[9px] font-bold tracking-[0.25em] text-slate-500 uppercase mb-4 px-1">
+      <p className="text-[9px] font-bold tracking-[0.25em] text-green-500 uppercase mb-4 px-1">
         Table of Contents
       </p>
       <ul className="space-y-0.5">
-        {sections.map((sec, si) => (
+        {sections?.map((sec, si) => (
           <li key={sec.heading?.id ?? `sec-${si}`}>
             {sec.heading && (
               <button
@@ -407,8 +407,8 @@ function TableOfContents({ headings, activeId, onSelect }) {
                   transition-colors duration-150 group
                   ${
                     activeId === sec.heading.id
-                      ? "text-cyan-400 bg-cyan-950/40"
-                      : "text-slate-300 hover:text-white hover:bg-slate-800/60"
+                      ? "text-green-400 bg-green-950/40"
+                      : "text-gray-300 hover:text-white hover:bg-slate-800/60"
                   }`}
               >
                 <span className="text-[10px] text-slate-600 font-mono w-5 shrink-0 text-right">
@@ -417,9 +417,6 @@ function TableOfContents({ headings, activeId, onSelect }) {
                 <span className="text-sm font-medium truncate">
                   {sec.heading.text}
                 </span>
-                {activeId === sec.heading.id && (
-                  <span className="ml-auto w-1 h-4 rounded-full bg-cyan-500 shrink-0" />
-                )}
               </button>
             )}
 
@@ -432,7 +429,7 @@ function TableOfContents({ headings, activeId, onSelect }) {
                       className={`w-full text-left text-xs py-1 px-1 rounded transition-colors duration-150 truncate block
                         ${
                           activeId === child.id
-                            ? "text-cyan-400"
+                            ? "text-green-400"
                             : "text-slate-500 hover:text-slate-200"
                         }`}
                     >
@@ -543,7 +540,7 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
         <div className="max-w-screen-xl mx-auto px-4 h-12 flex items-center gap-3">
           <button
             onClick={handleBack}
-            className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors shrink-0"
+            className="flex cursor-pointer items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors shrink-0"
           >
             <ArrowLeft size={14} />
             <span className="hidden sm:inline">Back to feed</span>
@@ -694,7 +691,7 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
           <div className="mt-16 pt-8 border-t border-slate-800/60">
             <button
               onClick={handleBack}
-              className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
+              className="flex items-center cursor-pointer gap-2 text-sm text-slate-400 hover:text-white transition-colors"
             >
               <ArrowLeft size={14} />
               Back to feed
