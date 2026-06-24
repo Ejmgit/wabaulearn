@@ -451,13 +451,13 @@ function TableOfContents({ headings, activeId, onSelect }) {
 function ReadingProgress({ progress }) {
   return (
     <div className="mt-6 pt-4 border-t border-slate-800/60">
-      <div className="flex items-center justify-between text-[9px] tracking-[0.2em] uppercase text-slate-500 mb-2">
+      <div className="flex items-center justify-between text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2">
         <span>Reading Progress</span>
         <span>{Math.round(progress)}%</span>
       </div>
       <div className="h-0.5 bg-slate-800 rounded-full overflow-hidden">
         <motion.div
-          className="h-full bg-cyan-500 rounded-full origin-left"
+          className="h-full bg-green-600 rounded-full origin-left"
           style={{ scaleX: progress / 100 }}
         />
       </div>
