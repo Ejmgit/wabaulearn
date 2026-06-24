@@ -527,11 +527,11 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
-      className="min-h-screen text-white"
+      className="min-h-screen  text-white"
     >
       {/* ── Sticky top bar ── */}
       <div className="sticky top-0 z-30 bg-[#0d1117]/95 backdrop-blur-md border-b border-slate-800/60">
-        <div className="max-w-screen-xl mx-auto px-4 h-12 flex items-center gap-3">
+        <div className="xl:container mx-auto xl:px-0 px-4 h-12 flex items-center gap-3">
           <button
             onClick={handleBack}
             className="flex cursor-pointer items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors shrink-0"
@@ -605,7 +605,7 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
       </AnimatePresence>
 
       {/* ── Page layout ── */}
-      <div className="max-w-screen-xl mx-auto flex">
+      <div className="xl:container xl:px-0 mx-auto flex">
         {/* ── Desktop sidebar ── */}
         <aside
           className="hidden lg:flex flex-col w-64 shrink-0 sticky top-12
