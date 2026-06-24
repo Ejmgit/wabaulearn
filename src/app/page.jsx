@@ -6,9 +6,11 @@ import ClinicalNewsCard from "./clinicalnews/ClinicalNews";
 export default async function Home() {
   const postData = await getPostData();
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen ">
       <HeroSection />
-      <ClinicalNewsCard postData={postData} />
+      <div className="container">
+        <ClinicalNewsCard postData={postData} />
+      </div>
     </div>
   );
 }

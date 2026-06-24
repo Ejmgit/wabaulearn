@@ -149,7 +149,7 @@ function ClinicalCard({ post }) {
 
 export default function ClinicalNewsCard({ postData }) {
   return (
-    <div className="min-h-screen xl:container flex flex-col">
+    <div className="min-h-screen bg-white ">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
