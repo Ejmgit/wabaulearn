@@ -149,11 +149,11 @@ function ClinicalCard({ post }) {
 
 export default function ClinicalNewsCard({ postData }) {
   return (
-    <div className="min-h-screen bg-white ">
+    <div className="min-h-screen flex flex-col mx-auto xl:px-0 px-4 xl:container">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="max-w-3xl  px-4 py-8"
+        className="max-w-4xl  px-4 py-8"
       >
         <div className="mb-8">
           <p className="text-[10px] font-bold tracking-[0.25em] text-green-500 uppercase mb-2">
@@ -166,7 +166,7 @@ export default function ClinicalNewsCard({ postData }) {
         </div>
 
         <div className="space-y-3">
-          {(postData || []).map((post, i) => (
+          {(postData || [])?.map((post, i) => (
             <motion.div
               key={post._id}
               initial={{ opacity: 0, y: 20 }}

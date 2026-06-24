@@ -8,9 +8,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen ">
       <HeroSection />
-      <div className="container">
-        <ClinicalNewsCard postData={postData} />
-      </div>
+      <ClinicalNewsCard postData={postData} />
     </div>
   );
 }
