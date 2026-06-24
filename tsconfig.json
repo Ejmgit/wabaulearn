@@ -32,7 +32,8 @@
     "src/app/(auth)/login/page.jsx",
     "src/app/(auth)/register/page.jsx",
     "src/Context/DataContext.jsx",
-    "src/app/page.jsx"
+    "src/app/page.jsx",
+    "src/app/layout.jsx"
   ],
   "exclude": ["node_modules"]
 }

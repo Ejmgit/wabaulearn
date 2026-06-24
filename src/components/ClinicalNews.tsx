@@ -385,7 +385,7 @@ interface ClinicalNewsProps {
   postData: Post[];
 }
 
-export default function ClinicalNews({ postData }: ClinicalNewsProps) {
+export default function ClinicalNew({ postData }: ClinicalNewsProps) {
   const [selected, setSelected] = useState<Post | null>(null);
 
   return (

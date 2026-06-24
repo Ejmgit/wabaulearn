@@ -1,5 +1,5 @@
-function ClinicalNews() {
-  return <div>News</div>;
+function ClinicalHome() {
+  return <div> Clinical Home</div>;
 }
 
-export default ClinicalNews;
+export default ClinicalHome;
