@@ -245,7 +245,7 @@ function PortableBlock({ block, idMap }) {
     }
     if (block.style === "h2") {
       return (
-        <div id={id} className="scroll-mt-24 mt-8 mb-3 flex items-center gap-2">
+        <div id={id} className="scroll-mt-24 mb-3 flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-cyan-500 shrink-0" />
           <h3 className="text-lg font-semibold text-white">
             {renderChildren(children)}
