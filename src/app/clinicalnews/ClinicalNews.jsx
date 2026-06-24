@@ -77,9 +77,9 @@ function ClinicalCard({ post }) {
       whileHover={{ scale: 1.012 }}
       whileTap={{ scale: 0.99 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className="w-full text-left group relative rounded-xl border border-slate-700/60
-                 bg-inherit backdrop-blur-sm p-5 hover:border-cyan-700/60
-                 hover:bg-slate-800/80 transition-colors duration-200
+      className="w-full text-left group relative rounded-xl border border-green-700/30
+                 bg-inherit backdrop-blur-sm p-5 hover:border-green-700/30
+                 hover:bg-green-700/20 transition-colors duration-200
                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
     >
       {/* Top row */}
@@ -114,7 +114,7 @@ function ClinicalCard({ post }) {
 
       {/* Excerpt */}
       {excerpt && (
-        <p className="text-sm text-gray-400 leading-relaxed line-clamp-3 mb-4">
+        <p className="text-sm text-gray-400 leading-relaxed line-clamp-2 mb-4">
           {excerpt}
         </p>
       )}
