@@ -317,14 +317,8 @@ function PortableBlock({ block, idMap }) {
   if (meta && meta.depth === 1) {
     const sectionNum = meta.sectionIndex;
     return (
-      <div id={meta.id} className="scroll-mt-24 mt-10 mb-6">
+      <div id={meta.id} className="scroll-mt-24  mb-6">
         <div className="flex items-center gap-3 mb-3">
-          {sectionNum > 0 && (
-            <span className="font-mono text-xs text-amber-500/80 tracking-widest">
-              {String(sectionNum).padStart(2, "0")}
-            </span>
-          )}
-          <span className="text-slate-600 text-sm">—</span>
           <h2 className="text-2xl font-bold text-white tracking-tight">
             {renderChildren(children)}
           </h2>
@@ -540,7 +534,7 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
         <div className="max-w-screen-xl mx-auto px-4 h-12 flex items-center gap-3">
           <button
             onClick={handleBack}
-            className="flex cursor-pointer items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors shrink-0"
+            className="flex cursor-pointer items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors shrink-0"
           >
             <ArrowLeft size={14} />
             <span className="hidden sm:inline">Back to feed</span>
@@ -691,7 +685,7 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
           <div className="mt-16 pt-8 border-t border-slate-800/60">
             <button
               onClick={handleBack}
-              className="flex items-center cursor-pointer gap-2 text-sm text-slate-400 hover:text-white transition-colors"
+              className="flex items-center cursor-pointer gap-2 text-sm text-gray-400 hover:text-white transition-colors"
             >
               <ArrowLeft size={14} />
               Back to feed
