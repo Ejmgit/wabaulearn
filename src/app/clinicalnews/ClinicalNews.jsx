@@ -103,7 +103,7 @@ function ClinicalCard({ post }) {
 
       {/* Title */}
       <h2
-        className="text-base font-bold text-white leading-snug mb-2
+        className="text-base md:text-lg font-bold text-white leading-snug mb-2
                      group-hover:text-cyan-100 transition-colors"
       >
         {post.title}
