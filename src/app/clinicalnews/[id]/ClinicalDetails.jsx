@@ -408,7 +408,7 @@ function TableOfContents({ headings, activeId, onSelect }) {
                 <span className="text-[10px] text-slate-600 font-mono w-5 shrink-0 text-right">
                   {si + 1}
                 </span>
-                <span className="text-sm font-medium truncate">
+                <span className="text-sm font-medium  ">
                   {sec.heading.text}
                 </span>
               </button>
