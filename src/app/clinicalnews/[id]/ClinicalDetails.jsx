@@ -239,7 +239,7 @@ function PortableBlock({ block, idMap }) {
               style={{
                 fontFamily: "'Georgia', 'Times New Roman', serif",
               }}
-              className="text-2xl font-bold text-white tracking-tight"
+              className="text-2xl font-bold text-white "
             >
               {renderChildren(children)}
             </h2>
