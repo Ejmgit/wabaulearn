@@ -77,7 +77,7 @@ function ClinicalCard({ post }) {
       whileHover={{ scale: 1.012 }}
       whileTap={{ scale: 0.99 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className="w-full text-left group relative rounded-xl border border-green-700/30
+      className="w-full text-left group relative rounded-xl cursor-pointer border border-green-700/30
                  bg-inherit backdrop-blur-sm p-5 hover:border-green-700/30
                  hover:bg-green-700/20 transition-colors duration-200
                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
@@ -96,7 +96,7 @@ function ClinicalCard({ post }) {
 
       {/* Category */}
       <div className="mb-2 flex items-center gap-2">
-        <span className="text-[10px] font-bold tracking-[0.2em] text-cyan-500 uppercase">
+        <span className="text-[10px] font-bold tracking-[0.2em] text-green-500/70 uppercase">
           {tag}
         </span>
       </div>
@@ -120,14 +120,14 @@ function ClinicalCard({ post }) {
       )}
 
       {/* Footer */}
-      <div className="flex items-center justify-between text-xs text-slate-500">
+      <div className="flex items-center justify-between text-xs text-gray-400">
         <div className="flex items-center gap-3">
           <span className="flex items-center gap-1">
             <BookOpen size={11} />
             {formatDate(post.publishedAt)}
           </span>
         </div>
-        <span className="text-slate-600 text-xs font-medium">
+        <span className="text-gray-500 text-xs font-medium">
           {post.author?.name}
         </span>
       </div>
