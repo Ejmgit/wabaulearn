@@ -80,7 +80,7 @@ function ClinicalCard({ post }) {
       className="w-full text-left group relative rounded-xl border border-green-700/30
                  bg-inherit backdrop-blur-sm p-5 hover:border-green-700/30
                  hover:bg-green-700/20 transition-colors duration-200
-                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
     >
       {/* Top row */}
       <div className="flex items-center justify-between mb-3">
