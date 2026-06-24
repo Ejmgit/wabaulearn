@@ -235,7 +235,12 @@ function PortableBlock({ block, idMap }) {
       return (
         <div id={id} className="scroll-mt-24  mb-6">
           <div className="flex items-center gap-3 mb-3">
-            <h2 className="text-2xl font-bold text-white tracking-tight">
+            <h2
+              style={{
+                fontFamily: "'Georgia', 'Times New Roman', serif",
+              }}
+              className="text-2xl font-bold text-white tracking-tight"
+            >
               {renderChildren(children)}
             </h2>
           </div>
@@ -247,7 +252,12 @@ function PortableBlock({ block, idMap }) {
       return (
         <div id={id} className="scroll-mt-24 mb-3 flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-cyan-500 shrink-0" />
-          <h3 className="text-lg font-semibold text-white">
+          <h3
+            style={{
+              fontFamily: "'Georgia', 'Times New Roman', serif",
+            }}
+            className="text-lg font-semibold text-white"
+          >
             {renderChildren(children)}
           </h3>
         </div>
@@ -256,6 +266,9 @@ function PortableBlock({ block, idMap }) {
     if (block.style === "h3") {
       return (
         <h4
+          style={{
+            fontFamily: "'Georgia', 'Times New Roman', serif",
+          }}
           id={id}
           className="scroll-mt-24 text-base font-semibold text-cyan-300 mt-6 mb-2"
         >
@@ -266,6 +279,9 @@ function PortableBlock({ block, idMap }) {
     if (block.style === "h4") {
       return (
         <h5
+          style={{
+            fontFamily: "'Georgia', 'Times New Roman', serif",
+          }}
           id={id}
           className="scroll-mt-24 text-sm font-bold uppercase tracking-widest text-slate-400 mt-5 mb-1"
         >
@@ -319,7 +335,12 @@ function PortableBlock({ block, idMap }) {
     return (
       <div id={meta.id} className="scroll-mt-24  mb-6">
         <div className="flex items-center gap-3 mb-3">
-          <h2 className="text-2xl font-bold text-white tracking-tight">
+          <h2
+            style={{
+              fontFamily: "'Georgia', 'Times New Roman', serif",
+            }}
+            className="text-2xl font-bold text-white "
+          >
             {renderChildren(children)}
           </h2>
         </div>
@@ -635,7 +656,12 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
               {post?.review[0]?.title}
             </span>
 
-            <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight mb-5 mt-2">
+            <h1
+              style={{
+                fontFamily: "'Georgia', 'Times New Roman', serif",
+              }}
+              className="text-2xl sm:text-3xl font-bold text-white leading-tight mb-5 mt-2"
+            >
               {post.title}
             </h1>
 
