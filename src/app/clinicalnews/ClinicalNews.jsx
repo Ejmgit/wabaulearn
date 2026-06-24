@@ -161,7 +161,7 @@ export default function ClinicalNewsCard({ postData }) {
           </p>
           <h1 className="text-2xl font-bold text-white">Trending Articles</h1>
           <p className="text-sm text-slate-400 mt-1">
-            Peer-reviewed evidence for Sub-Saharan African practice
+            Peer reviewed evidence for Sub-Saharan African practice
           </p>
         </div>
 
