@@ -101,10 +101,6 @@ function ClinicalCard({ post }) {
         <span className="text-[10px] font-bold tracking-[0.2em] text-cyan-500 uppercase">
           {tag}
         </span>
-        <span className="text-slate-600 text-[10px]">·</span>
-        <span className="text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">
-          Living Document
-        </span>
       </div>
 
       {/* Title */}
@@ -141,7 +137,7 @@ function ClinicalCard({ post }) {
 
       {/* Hover accent */}
       <span
-        className="absolute left-0 top-4 bottom-4 w-0.5 rounded-full bg-cyan-500
+        className="absolute left-0 top-0 bottom-0 right-0 w-0.5 rounded-full bg-green-600
                        scale-y-0 group-hover:scale-y-100 transition-transform
                        duration-200 origin-center"
       />
@@ -153,14 +149,14 @@ function ClinicalCard({ post }) {
 
 export default function ClinicalNewsCard({ postData }) {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen xl:container flex flex-col">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="max-w-3xl mx-auto px-4 py-8"
+        className="max-w-3xl  px-4 py-8"
       >
         <div className="mb-8">
-          <p className="text-[10px] font-bold tracking-[0.25em] text-cyan-500 uppercase mb-2">
+          <p className="text-[10px] font-bold tracking-[0.25em] text-green-500 uppercase mb-2">
             Clinical Feed
           </p>
           <h1 className="text-2xl font-bold text-white">Trending Articles</h1>
