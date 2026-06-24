@@ -131,13 +131,6 @@ function ClinicalCard({ post }) {
           {post.author?.name}
         </span>
       </div>
-
-      {/* Hover accent */}
-      <span
-        className="absolute left-0 top-0 bottom-0 right-0 w-0.5 rounded-full bg-green-600
-                       scale-y-0 group-hover:scale-y-100 transition-transform
-                       duration-200 origin-center"
-      />
     </motion.button>
   );
 }
