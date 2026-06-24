@@ -103,7 +103,10 @@ function ClinicalCard({ post }) {
 
       {/* Title */}
       <h2
-        className="text-base md:text-lg font-bold text-white leading-snug mb-2
+        style={{
+          fontFamily: "'Georgia', 'Times New Roman', serif",
+        }}
+        className="text-base md:text-xl font-bold text-white leading-snug mb-2
                      group-hover:text-cyan-100 transition-colors"
       >
         {post.title}
@@ -153,7 +156,14 @@ export default function ClinicalNewsCard({ postData }) {
           <p className="text-[10px] font-bold tracking-[0.25em] text-green-500 uppercase mb-2">
             Clinical Feed
           </p>
-          <h1 className="text-2xl font-bold text-white">Trending Articles</h1>
+          <h1
+            style={{
+              fontFamily: "'Georgia', 'Times New Roman', serif",
+            }}
+            className="text-2xl font-bold text-white"
+          >
+            Trending Articles
+          </h1>
           <p className="text-sm text-slate-400 mt-1">
             Peer reviewed evidence for Sub-Saharan African practice
           </p>
