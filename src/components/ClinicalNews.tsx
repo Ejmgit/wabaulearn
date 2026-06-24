@@ -389,7 +389,7 @@ export default function ClinicalNews({ postData }: ClinicalNewsProps) {
   const [selected, setSelected] = useState<Post | null>(null);
 
   return (
-    <div>
+    <div className="flex flex-col xl:container">
       <AnimatePresence mode="wait">
         {selected ? (
           <ClinicalDetail
@@ -404,7 +404,7 @@ export default function ClinicalNews({ postData }: ClinicalNewsProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="max-w-4xl mx-auto px-4 py-8"
+            className="max-w-4xl  px-4 py-8"
           >
             {/* Page header */}
             <div className="mb-8">
