@@ -153,19 +153,17 @@ function ClinicalCard({ post }) {
 
 export default function ClinicalNewsCard({ postData }) {
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="max-w-2xl mx-auto px-4 py-8"
+        className="max-w-3xl mx-auto px-4 py-8"
       >
         <div className="mb-8">
           <p className="text-[10px] font-bold tracking-[0.25em] text-cyan-500 uppercase mb-2">
             Clinical Feed
           </p>
-          <h1 className="text-2xl font-bold text-white">
-            WABAU Clinical Updates
-          </h1>
+          <h1 className="text-2xl font-bold text-white">Trending Articles</h1>
           <p className="text-sm text-slate-400 mt-1">
             Peer-reviewed evidence for Sub-Saharan African practice
           </p>
