@@ -69,6 +69,8 @@ function ClinicalCard({ post }) {
   const excerpt = getExcerpt(post.body);
   const views = 8400; // stable demo value
 
+  // console.log(post?.categories[0]?.title);
+
   return (
     <motion.button
       layout
@@ -91,9 +93,8 @@ function ClinicalCard({ post }) {
                          tracking-widest text-cyan-400 uppercase"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
-          Independent WABAU Review
+         {post?.review[0]?.title}
         </span>
-        <StarRating rating={post.review ?? 4} />
       </div>
 
       {/* Category */}

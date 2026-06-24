@@ -13,7 +13,7 @@ export async function getPostData() {
         bio
       },
 
-      review->{
+      review[]->{
         title,
       },
 
@@ -47,8 +47,8 @@ export async function getPostById(id) {
         bio
       },
 
-      review->{
-        title
+      review[]->{
+        title,
       },
 
       categories[]->{
