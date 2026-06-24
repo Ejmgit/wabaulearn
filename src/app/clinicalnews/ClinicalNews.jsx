@@ -67,7 +67,6 @@ function ClinicalCard({ post }) {
   const router = useRouter();
   const tag = getTag(post);
   const excerpt = getExcerpt(post.body);
-  const views = 8400; // stable demo value
 
   return (
     <motion.button
@@ -123,10 +122,6 @@ function ClinicalCard({ post }) {
           <span className="flex items-center gap-1">
             <BookOpen size={11} />
             {formatDate(post.publishedAt)}
-          </span>
-          <span className="flex items-center gap-1">
-            <Eye size={11} />
-            {(views / 1000).toFixed(1)}K views
           </span>
         </div>
         <span className="text-slate-600 text-xs font-medium">
