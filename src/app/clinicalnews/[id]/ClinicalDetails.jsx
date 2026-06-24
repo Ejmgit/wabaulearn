@@ -542,7 +542,7 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
-      className="min-h-screen bg-[#0d1117] text-white"
+      className="min-h-screen  text-white"
     >
       {/* ── Sticky top bar ── */}
       <div className="sticky top-0 z-30 bg-[#0d1117]/95 backdrop-blur-md border-b border-slate-800/60">
@@ -682,50 +682,7 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
                 <Tag size={9} />
                 {tag}
               </span>
-              <span
-                className="text-[10px] font-bold tracking-[0.15em] uppercase text-slate-500
-                               border border-slate-700/50 rounded-full px-2.5 py-1"
-              >
-                Living Document
-              </span>
             </div>
-
-            {post.review && (
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
-                className="rounded-lg border border-slate-700/60 bg-slate-800/50 p-4"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-xs font-semibold text-white mb-0.5">
-                      Overall evidence strength for first-line therapy
-                    </p>
-                    <p className="text-[10px] text-slate-500">
-                      Based on peer review · Last updated{" "}
-                      {formatDate(post.publishedAt)}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-0.5 shrink-0">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star
-                        key={i}
-                        size={14}
-                        className={
-                          i <= post.review
-                            ? "fill-amber-400 text-amber-400"
-                            : "fill-transparent text-slate-600"
-                        }
-                      />
-                    ))}
-                    <span className="text-slate-400 text-xs ml-1">
-                      {post.review}/5
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            )}
           </header>
 
           <div className="h-px bg-slate-800/60 mb-8" />
