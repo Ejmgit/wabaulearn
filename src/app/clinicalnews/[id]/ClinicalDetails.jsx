@@ -235,12 +235,6 @@ function PortableBlock({ block, idMap }) {
       return (
         <div id={id} className="scroll-mt-24 mt-10 mb-6">
           <div className="flex items-center gap-3 mb-3">
-            {sectionNum && (
-              <span className="font-mono text-xs text-amber-500/80 tracking-widest">
-                {String(sectionNum).padStart(2, "0")}
-              </span>
-            )}
-            <span className="text-slate-600 text-sm">—</span>
             <h2 className="text-2xl font-bold text-white tracking-tight">
               {renderChildren(children)}
             </h2>
@@ -542,7 +536,7 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
-      className="min-h-screen  text-white"
+      className="min-h-screen text-white"
     >
       {/* ── Sticky top bar ── */}
       <div className="sticky top-0 z-30 bg-[#0d1117]/95 backdrop-blur-md border-b border-slate-800/60">
@@ -647,7 +641,7 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
                              tracking-widest text-cyan-400 uppercase mb-4"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
-              Independent WABAU Review
+              {post?.review[0]?.title}
             </span>
 
             <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight mb-5 mt-2">
