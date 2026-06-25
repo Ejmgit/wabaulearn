@@ -427,7 +427,7 @@ function TableOfContents({ headings, activeId, onSelect }) {
                   transition-colors duration-150 group
                   ${
                     activeId === sec.heading.id
-                      ? "text-green-400 bg-green-950/40"
+                      ? "text-green-300 bg-green-950/40"
                       : "text-gray-300 hover:text-white hover:bg-slate-800/60"
                   }`}
               >
