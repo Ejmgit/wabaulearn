@@ -82,7 +82,10 @@ export default function HeroSection() {
           initial="hidden"
           animate="visible"
           className="text-[2.6rem] md:text-[3rem] font-bold leading-[1.12] tracking-tight text-white mb-5"
-          style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+          style={{
+            // fontFamily: "'Georgia', 'Times New Roman', serif",
+            fontFamily: "'Playfair Display', Georgia, serif",
+          }}
         >
           Clinical intelligence,{" "}
           <em
@@ -90,7 +93,8 @@ export default function HeroSection() {
             style={{
               //   fontStyle: "italic",
               color: "#34d399",
-              fontFamily: "'Georgia', 'Times New Roman', serif",
+              // fontFamily: "'Georgia', 'Times New Roman', serif",
+              fontFamily: "'Playfair Display', Georgia, serif",
             }}
           >
             built for African

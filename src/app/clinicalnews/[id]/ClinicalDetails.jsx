@@ -237,7 +237,8 @@ function PortableBlock({ block, idMap }) {
           <div className="flex items-center gap-3 mb-3">
             <h2
               style={{
-                fontFamily: "'Georgia', 'Times New Roman', serif",
+                // fontFamily: "'Georgia', 'Times New Roman', serif",
+                fontFamily: "'Playfair Display', Georgia, serif",
               }}
               className="text-2xl font-bold text-white "
             >
@@ -254,7 +255,8 @@ function PortableBlock({ block, idMap }) {
           <span className="h-2 w-2 rounded-full bg-cyan-500 shrink-0" />
           <h3
             style={{
-              fontFamily: "'Georgia', 'Times New Roman', serif",
+              // fontFamily: "'Georgia', 'Times New Roman', serif",
+              fontFamily: "'Playfair Display', Georgia, serif",
             }}
             className="text-lg font-semibold text-white"
           >
@@ -267,7 +269,8 @@ function PortableBlock({ block, idMap }) {
       return (
         <h4
           style={{
-            fontFamily: "'Georgia', 'Times New Roman', serif",
+            // fontFamily: "'Georgia', 'Times New Roman', serif",
+            fontFamily: "'Playfair Display', Georgia, serif",
           }}
           id={id}
           className="scroll-mt-24 text-base font-semibold text-cyan-300 mt-6 mb-2"
@@ -280,7 +283,8 @@ function PortableBlock({ block, idMap }) {
       return (
         <h5
           style={{
-            fontFamily: "'Georgia', 'Times New Roman', serif",
+            // fontFamily: "'Georgia', 'Times New Roman', serif",
+            fontFamily: "'Playfair Display', Georgia, serif",
           }}
           id={id}
           className="scroll-mt-24 text-sm font-bold uppercase tracking-widest text-slate-400 mt-5 mb-1"
@@ -337,7 +341,8 @@ function PortableBlock({ block, idMap }) {
         <div className="flex items-center gap-3 mb-3">
           <h2
             style={{
-              fontFamily: "'Georgia', 'Times New Roman', serif",
+              // fontFamily: "'Georgia', 'Times New Roman', serif",
+              fontFamily: "'Playfair Display', Georgia, serif",
             }}
             className="text-2xl font-bold text-white "
           >
@@ -658,7 +663,8 @@ export default function ClinicalDetail({ post, onBack, backHref }) {
 
             <h1
               style={{
-                fontFamily: "'Georgia', 'Times New Roman', serif",
+                // fontFamily: "'Georgia', 'Times New Roman', serif",
+                fontFamily: "'Playfair Display', Georgia, serif",
               }}
               className="text-2xl sm:text-3xl font-bold text-white leading-tight mb-5 mt-2"
             >

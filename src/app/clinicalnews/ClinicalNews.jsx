@@ -104,7 +104,8 @@ function ClinicalCard({ post }) {
       {/* Title */}
       <h2
         style={{
-          fontFamily: "'Georgia', 'Times New Roman', serif",
+          // fontFamily: "'Georgia', 'Times New Roman', serif",
+          fontFamily: "'Playfair Display', Georgia, serif",
         }}
         className="text-base md:text-xl font-bold text-white leading-snug mb-2
                      group-hover:text-cyan-100 transition-colors"
@@ -151,7 +152,8 @@ export default function ClinicalNewsCard({ postData }) {
           </p>
           <h1
             style={{
-              fontFamily: "'Georgia', 'Times New Roman', serif",
+              // fontFamily: "'Georgia', 'Times New Roman', serif",
+              fontFamily: "'Playfair Display', Georgia, serif",
             }}
             className="text-2xl font-bold text-white"
           >
