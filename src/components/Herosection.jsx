@@ -113,7 +113,7 @@ export default function HeroSection() {
           className="text-sm md:text-base leading-relaxed max-w-lg mb-10"
           style={{ color: "rgba(255,255,255,0.62)" }}
         >
-          Evidence-scored reference, real-case CME, and living protocols
+          Evidence scored reference, real-case CME, and living protocols
           calibrated to African disease burden, drug availability, and standard
           treatment guidelines.
         </motion.p>
