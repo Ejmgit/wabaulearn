@@ -33,7 +33,8 @@
     "src/app/(auth)/register/page.jsx",
     "src/Context/DataContext.jsx",
     "src/app/page.jsx",
-    "src/app/layout.jsx"
+    "src/app/layout.jsx",
+    "src/Config/test.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,8 +1,9 @@
 "use client";
 
+import UserContext from "@/Context/UserContext";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 
 // Animation variants
@@ -25,6 +26,7 @@ const fadeIn = (delay = 0) => ({
 
 export default function HeroSection() {
   const [query, setQuery] = useState("");
+  const { profile } = useContext(UserContext);
   // Note Search results will be displayed on modal
 
   return (
@@ -72,7 +74,7 @@ export default function HeroSection() {
             className="text-[10px] font-semibold tracking-[0.22em] uppercase"
             style={{ color: "rgba(52,211,153,0.8)" }}
           >
-            Welcome back, Dr. Osei-Bonsu
+            Welcome back, {profile?.full_name}
           </span>
         </motion.p>
 
